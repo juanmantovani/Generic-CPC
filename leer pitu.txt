@@ -1,0 +1,13 @@
+Para que ande una vez que se descarga todo ejecutar en consola (desde el directorio del proyecto):
+Instalar las porquerias definidas en composerjson (paqueterias y demas yerbas)
+$ composer install
+
+Configrar la BD (user pass)
+$ cp .env.example .env
+
+
+Clave de tu proyecto
+$ php artisan key:generate
+
+Para migrar los datos a la BD
+$ php artisan migrate 
