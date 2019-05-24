@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        //Laravel\Dusk\DuskServiceProvider::class,
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
         /*
          * Application Service Providers...
