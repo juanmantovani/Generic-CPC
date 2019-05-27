@@ -33,7 +33,7 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">{{ trans('adminlte_lang::message.header') }}</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
+            <li class="active"><a href="{{ url('/administracion') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
             <li><a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.anotherlink') }}</span></a></li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i class="fa fa-angle-left pull-right"></i></a>
@@ -42,6 +42,23 @@
                     <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
                 </ul>
             </li>
+            <!--Productos-->
+            <li class="treeview">
+                <a href="#"><i class='fa fa-archive'></i> <span> Almacen </span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">  
+                    <li><a href="/administracion/productos"><i class='fa fa-product-hunt'></i><span> Productos</span></a></li>
+                    <li><a href="/administracion/categorias"><i class='fa fa-navicon'></i><span> Categorias</span></a></li>
+                </ul>
+            </li>
+           <!--Reportes-->
+            <li class="treeview">
+                <a href="#"><i class='fa fa-newspaper-o'></i> <span> Reportes </span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">  
+                    <li><a href="/administracion/reportes"><i class='fa fa-warning'></i><span>Reportes por vencimiento </span></a></li>
+                    <li><a href="/administracion"><i class='fa fa-navicon'></i><span> Categorias</span></a></li>
+                </ul>
+            </li>
+
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

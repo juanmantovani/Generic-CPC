@@ -11,15 +11,24 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    //    Route::get('/link1', function ()    {
-//        // Uses Auth Middleware
-//    });
+/*
+Route::get('/administracion', function () {
+    return view('welcome');
+})->name('home');*/
 
-    //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
-    #adminlte_routes
+
+//Rutas con middleware de autentificacion
+Route::group(['middleware' => 'auth'], function () {
+	Route::resource('/administracion/productos', 'ProductoController');
+	Route::resource('/administracion/categorias', 'CategoriaController');
+
+	//Home del reporte
+	Route::get('/administracion/reportes','ReporteController@index');
+	Route::post('/administracion/reportes/get_vencidos','ReporteController@get_vencidos')->name('get_vencidos');
+
 });
