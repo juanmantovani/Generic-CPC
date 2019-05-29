@@ -35,6 +35,11 @@
 @section('main-content')
 	<div class="container-fluid spark-screen">
 		<div class="row">
+
+
+@include('administracion.alerta')
+
+
 			<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
                 <div class="form-group">
                     <label for="title">Seleccione el tipo de reporte a realizar</label>
@@ -144,14 +149,27 @@
 				document.getElementById("tabla_resultados").innerHTML="";
 				for(i=0; i<filas; i++){
 					var display_results = $("#tabla_resultados");
-					var results = '<table id="tabla_de_los_resultados" class="table table-striped table-hover">';
-					results += '<thead> <tr> <th>id</th> <th>Categoria</th> <th>Codigo</th> <th>Nombre</th>';
+					var results = '<div>';
+					 results += '{{ Form::open(array('route' => 'bajas')) }}';
+					 results += '{{ Form::token() }}';
+					results += '<div class="row">';
+					results += '<div class="col-md-push-2">';
+					 results += '<span class="label-primary">Seleccione los productos a dar de baja</span>';
+					 results += '</div>';
+					 results += '<div class="col-md-pull-3">';
+					results += '<button type="submit" class="btn btn-danger">Dar de baja</button>';
+					results += '</div>';
+					results += '</div>';
+					results += '</br>';
+					 results += '<table id="tabla_de_los_resultados" class="table table-striped table-hover">';
+					results += '<thead> <tr> <th> </th> <th>id</th> <th>Categoria</th> <th>Codigo</th> <th>Nombre</th>';
 					results += '<th>Fecha Vencimiento</th> <th>Opciones</th> </tr> </thead> <tbody>';
 
 					if (data.productos.length != 0)
 						{
 						for(i=0; i<filas; i++){
 		  					results += '<tr>';
+		  					results +='<td> <input type="checkbox" id="cbox2" name="baja[]" value="'+ data.productos[i].id+' "></td>';
 		  					results +='<td>' + data.productos[i].id + '</td>';
 		  					results +='<td>' + data.productos[i].categoria_id + '</td>';
 							results +='<td>' + data.productos[i].codigo + '</td>';		
@@ -164,6 +182,9 @@
 		  					results +='</tr>';	
 						};
 						results += '</tbody></table>';
+						
+						results += '{{ Form::close() }}';
+						results += '</div>';
 						display_results.append(results);
 						carga_datatable();
 					} 

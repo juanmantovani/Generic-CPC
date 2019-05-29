@@ -30,5 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
 	//Home del reporte
 	Route::get('/administracion/reportes','ReporteController@index');
 	Route::post('/administracion/reportes/get_vencidos','ReporteController@get_vencidos')->name('get_vencidos');
+	Route::get('stock/chart/vencimientos','ReporteController@chart')->name('vencimientos_chart');
+	Route::post('/administracion/productos/bajas','ProductoController@bajas')->name('bajas');
 
 });

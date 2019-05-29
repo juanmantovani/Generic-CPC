@@ -19,7 +19,7 @@ class ProductoController extends Controller
     public function index()
     {
     //$productos=Producto::all();
-        $productos=db::table('productos')->join('categorias','productos.categoria_id','categorias.id')->select('productos.*','categorias.nombre as cate_nombre')->paginate(5);
+        $productos=db::table('productos')->join('categorias','productos.categoria_id','categorias.id')->select('productos.*','categorias.nombre as cate_nombre')->orderby('productos.created_at')->paginate(20);
        // dd($productos);
       
         return view('administracion.almacen.productos.index',compact('productos'));
@@ -69,7 +69,7 @@ class ProductoController extends Controller
         }    
       //  dd($producto);
         $producto->save();
-        return Redirect::to('/administracion');  
+        return Redirect::to('/administracion/productos')->with(['titulo'=>'Nuevo Producto','status'=> 'Se añadio exitosamente un nuevo producto!','tipo'=>'success']);  
     }
 
     /**
@@ -79,8 +79,11 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        return view("administracion.almacen.productos.show",["producto"=>Producto::findOrFail($id)]);
+    {    $producto=db::table('productos')->find($id);
+     //  dd($producto);
+        $categoria=DB::table('categorias')->where('condicion','=','1')->find($producto->categoria_id);
+  // dd($producto,$categoria);
+        return view("administracion.almacen.productos.show",compact('producto','categoria'));
     }
 
     /**
@@ -135,4 +138,22 @@ class ProductoController extends Controller
         $producto->update();
         return Redirect::to('/administracion/almacen/productos ');
     }
+
+
+        public function bajas(Request $response)
+      {
+        if($response->baja==null){
+              return back()->withInput()->with(['titulo'=>'Eliminación de producto','status'=> 'Si desea eliminar el/los productos, debe seleccionar al menos 1. Acción no completada','tipo'=>'danger']);
+        }else{
+
+            $productos=db::table('productos')->wherein('id',$response->baja)->update(['estado'=>0]);
+
+             return back()->withInput()->with(['titulo'=>'Eliminacion de productos','status'=> 'Eliminacion exitosa!','tipo'=>'success']);
+
+        dd($productos);
+
+
+        }
+
+      }
 }

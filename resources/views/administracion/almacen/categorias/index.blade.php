@@ -4,10 +4,13 @@
 	Change Title here!
 @endsection
 
+@section('contentheader_title', 'Listado productos')
 
 @section('main-content')
 
 <div class="row">
+	@include('administracion.alerta')
+	
 	<div class="col-lg-8 col-md-8 col-sm-8  col-xs-12">
 		<h3>Listado de Categorías <a href="categorias/create"><button class="btn btn-success">Nuevo</button></a></h3>
 

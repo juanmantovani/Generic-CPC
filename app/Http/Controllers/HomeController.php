@@ -9,6 +9,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use DB;
+use Auth;
 
 /**
  * Class HomeController
@@ -33,6 +35,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('adminlte::home');
+        $user = Auth::user();
+        
+        return view('adminlte::home',compact($user));
     }
 }

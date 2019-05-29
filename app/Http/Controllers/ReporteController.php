@@ -98,15 +98,40 @@ class ReporteController extends Controller
 
 
         if($request->cat==null){
-            $productos=db::table('productos')->where('fecha_vencimiento','<',$fecha_vencimiento)->get();
+            $productos=db::table('productos')->where('fecha_vencimiento','<',$fecha_vencimiento)->where('estado',1)->get();
         //    dd($productos);
         }
         else
         {
            // dd($request->cat);
-             $productos=db::table('productos')->where('categoria_id',$request->cat)->where('fecha_vencimiento','<',$fecha_vencimiento)->get();
+             $productos=db::table('productos')->where('categoria_id',$request->cat)->where('fecha_vencimiento','<',$fecha_vencimiento)->where('estado',1)->get();
         }
         $data["productos"]=$productos;
         return $data;
     }
+
+
+     public function chart()
+      {// productos que vencen 5 dias despues del actual dia
+         Carbon::setlocale('es');
+        $hoy=Carbon::now();
+        $dias=array();
+        $i=0;
+        $dias[0]=$hoy->format("Y-m-d");
+        
+        $i=$i+1;
+        while ($i <= 4) {
+            $var_dia=$hoy->addDay();
+            $dias[$i]=$var_dia->format("Y-m-d");
+            $i++;
+        }
+
+        $res=db::table('productos')->where('estado',1)->wherein('fecha_vencimiento',$dias)->get();
+
+        return response()->json($res);
+      }
+
+       
+
+
 }

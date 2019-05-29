@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('htmlheader_title')
-	Change Title here!
+Nuevo Producto
 @endsection
 
 
@@ -9,6 +9,10 @@
 <script src="{{ url (mix('/js/app.js')) }}" type="text/javascript"></script>
 
 <script src="{{ asset ("/plugins/datepicker/bootstrap-datepicker.js") }}" type="text/javascript"></script>
+
+
+<!--Para formatear la fecha-->
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
 
 @section('main-content')
 	<div class="container-fluid spark-screen">
@@ -44,6 +48,7 @@
                         <label>Categoría</label>
                         <select name="idcategoria" class="form-control"><!--con el name se valida en el ProductoFormRequest-->
                             <!--voy a recibir todas las categorias en una variable $categorias desde el metodo create de ProductoController-->
+                             <option value="">Seleccione una categoría</option>
                             @foreach ($categorias as $cat)
                                 <option value="{{$cat->id}}">{{$cat->nombre}}</option>
                             @endforeach
@@ -59,7 +64,7 @@
                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                     <div class="form-group">
                         <label for="stock">Stock</label>
-                        <input type="text" name="stock" required value="{{old('stock')}}" class="form-control" placeholder="Stock del producto...">
+                        <input type="number" name="stock" required value="{{old('stock')}}" class="form-control" placeholder="Stock del producto...">
                     </div>      
                     
                 </div>
@@ -76,7 +81,7 @@
                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                     <div class="form-group">
                         <label for="descripcion">Fecha de ingreso</label>
-                        <input data-date-format="dd/mm/yyyy" name="fecha_ingreso"  class="form-control" placeholder="Fecha de ingreso del producto..." id="fecha_ingreso">
+                        <input data-date-format="dd/mm/yyyy" name="fecha_ingreso" required class="form-control" placeholder="Fecha de ingreso del producto..." id="fecha_ingreso">
                     </div>      
                 </div>
 
@@ -84,7 +89,7 @@
                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                     <div class="form-group" class="input-group date">
                         <label for="descripcion">Fecha de vencimiento</label>
-                        <input data-date-format="dd/mm/yyyy" name="fecha_vencimiento" class="form-control" placeholder="Fecha de vencimiento del producto..." id="fecha_vencimiento" >
+                        <input data-date-format="dd/mm/yyyy" name="fecha_vencimiento" required class="form-control" placeholder="Fecha de vencimiento del producto..." id="fecha_vencimiento" >
                     </div>      
                 </div>
 
@@ -131,8 +136,6 @@ $('#fecha_ingreso').datepicker({
                     format:'dd/mm/yyyy',  language: 'es',  autoclose: true, todayHighlight: true, 
     orientation: "top auto"
                 }).datepicker("setDate",'now');
-/* $('#fecha_ingreso').datepicker({ autoclose: true, language: 'es' });
-$('#fecha_ingreso').datepicker('update', new Date());*/
 $("#fecha_vencimiento").datepicker( {language: 'es', autoclose: true, todayHighlight: true, 
     orientation: "top auto"});
   

@@ -8,40 +8,14 @@
 @section('main-content')
 	<div class="container-fluid spark-screen">
 		<div class="row">
-			<div class="col-md-9 col-md-offset-1">
-
-				<div class="box box-success box-solid">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Example box</h3>
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        </div>
-                        <!-- /.box-tools -->
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        Put your content here
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-			</div>
-		</div>
+			
             <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <h3>Editar Producto: {{$producto->nombre}}</h3>
-            @if (count($errors)>0)
-            <div class="alert alert-danger">
-            <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
-            </ul>
-            </div>
-            @endif
+            
         </div><!--columna-->
     </div><!--fila-->
-                         <!--13-36-->
+           
             {!!Form::model($producto,['method'=>'PATCH','action'=>['ProductoController@update',$producto->id],'files'=>'true'])!!}
 
             {{Form::token()}}
@@ -60,7 +34,7 @@
                             <!--voy a recibir todas las categorias en una variable $categorias desde el metodo create de productoController-->
                             @foreach ($categorias as $unacategoria)
                                 @if ($unacategoria->id==$producto->categoria_id)
-                                <option value="{{$unacategoria->id}}" selected>{{$unacategoria->nombre}}</option><!--muestra la categoria seleccionada cuando coincida con la uqe trae puesta el producto-->
+                                <option value="{{$unacategoria->id}}" selected>{{$unacategoria->nombre}}</option><
                                 @else
                                 <option value="{{$unacategoria->id}}">{{$unacategoria->nombre}}</option>
                                 @endif

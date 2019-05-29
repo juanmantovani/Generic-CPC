@@ -4,6 +4,7 @@
 	Change Title here!
 @endsection
 
+@section('contentheader_title', 'Listado de producto')
 
 @section('main-content')
 	<div class="container-fluid spark-screen">

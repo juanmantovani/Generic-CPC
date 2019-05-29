@@ -5,6 +5,9 @@
 @endsection
 
 
+@section('contentheader_title', 'Edicion de nuevo producto')
+
+
 @section('main-content')
 	<div class="container-fluid spark-screen">
         <div class="row">

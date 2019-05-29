@@ -21,29 +21,15 @@
 <script src="https://code.jquery.com/jquery-3.3.1.js" type="text/javascript"></script>
 
 --->
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+
+<script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js"></script>
 @section('main-content')
 	<div class="container-fluid spark-screen">
-		<div class="row">
-			<div class="col-md-9 col-md-offset-1">
 
-				<div class="box box-success box-solid">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Example box</h3>
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        </div>
-                        <!-- /.box-tools -->
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        Listado de productos
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-			</div>
-		</div>
 	<div class="row">
+			@include('administracion.alerta')
 	<div class="col-lg-8 col-md-8 col-sm-8  col-xs-12">
 		<h3>Listado de Productos <a href="productos/create"><button class="btn btn-success">Nuevo</button></a></h3>
 		<!--//se incluye la vista search.blade.php-->
@@ -75,15 +61,24 @@
 					<td>{{$unproducto->cate_nombre}}</td>
 					<td>{{$unproducto->stock}}</td>
 					<td>
-						<img src="{{asset('imagenes/productos/'.$unproducto->imagen)}}" alt="{{$unproducto->nombre}}" width="100px" class="img/"><!--asset busca en la carpeta publica alto height="100px"-->
+						@if($unproducto->imagen!=null)
+						<img src="{{asset('imagenes/productos/'.$unproducto->imagen)}}" alt="{{$unproducto->nombre}}" width="40px" class="img/"><!--asset busca en la carpeta publica alto height="100px"-->
+						@else
+						--
+						@endif
 					</td>
-					<td>{{$unproducto->estado}}</td>
-					<td>{{$unproducto->fecha_vencimiento}}</td>
-					<td>{{$unproducto->fecha_vencimiento}}</td>
+					<td>@if($unproducto->estado==1)
+						Activo
+						@else
+						Inactivo
+						@endif
+					</td>
+					<td>{{ ($unproducto->fecha_ingreso) }}</td>
+					<td>{{ ($unproducto->fecha_vencimiento) }}</td>
 					<td>
 
-                    	<a href="{{URL::action('ProductoController@edit',$unproducto->id)}}"><button class="btn btn-info">Editar</button></a>
                     	<a href="{{URL::action('ProductoController@show',$unproducto->id)}}"><button class="btn btn-primary">Ver</button></a>
+                    	<a href="{{URL::action('ProductoController@edit',$unproducto->id)}}"><button class="btn btn-warning">Editar</button></a>
                     	<a href="" data-target="#modal-delete-{{$unproducto->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
 					</td>
 				</tr>
@@ -99,11 +94,17 @@
 @section('scripts')
 
 
-<script>
 
-
-	    $('#productos_tabla').DataTable( {
-        dom: 'Bfrtip',
+<script type="text/javascript">
+	$('#productos_tabla').DataTable( {
+		dom: 'Bfrtip',
+        order: [
+        [8, 'asc'] //The position of your column and the order
+        ],
+        columnDefs: [{
+        	"type": "date-uk", //The sorting for Uk dates
+        	"targets": 8 //Again the position of your column which has dates
+        }],
         processing: true,
        /* serverSide: true,
         stateSave: true,*/
@@ -128,15 +129,11 @@
 
         },
         ],
-      /* Para ocultar columnas por defecto
-      	columnDefs: [ {
-        	targets: -1,
-        	visible: false
-        } ],*/
         language: {
         	         "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
 			    },
 			} );
+
 </script>
 
 @show
