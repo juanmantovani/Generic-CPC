@@ -54,7 +54,22 @@
 
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-                <label for="descripcion">Fecha de ingreso: </label>
+                <label for="dias">Dias de anticipacion de retiro de gondola:</label>
+                    {{$producto->dias_ant_retiro}}
+            </div>      
+        </div>
+
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+                <label for="retiro">Fecha de retiro de gondola: </label>
+                {{ Carbon\Carbon::parse($producto->fecha_retiro_gondola)->format('d-m-Y') }}
+                
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+                <label for="ingreos">Fecha de ingreso: </label>
                 {{ Carbon\Carbon::parse($producto->fecha_ingreso)->format('d-m-Y') }}
                 
             </div>
@@ -62,7 +77,7 @@
 
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-                <label for="descripcion">Fecha de vencimiento: </label>
+                <label for="vencimiento">Fecha de vencimiento: </label>
                 {{ Carbon\Carbon::parse($producto->fecha_vencimiento)->format('d-m-Y') }}
                 </div>
         </div>
@@ -70,7 +85,7 @@
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
                 <label for="imagen">Imagen: </label>
-                @if(($producto->imagen)!="")
+                @if ( ($producto->imagen)!="")
                     <img src="{{ asset('imagenes/productos/'.$producto->imagen)}} " height="120px">
                 @else
                 No posee imagen

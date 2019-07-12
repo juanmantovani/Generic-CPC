@@ -24,28 +24,13 @@
 				@endif
 				<!--CategoriaController, si el metodo es POST llama a la funcion store, si el metodo es path va a llamar a la funcion update, si el metodo es  delete llama a la funcion destroy-->
 				{!!Form::open(array('action'=>'CategoriaController@store','method'=>'POST','autocomplete'=>'off'))!!}
-
 				{{Form::token()}}
-				<div class="form-group">
-					<label for="nombre">Nombre</label>
-					<!--nombre es recibido por CategoriaFormRequest en la funcion rules() 8-36 8:08 y tambien sera usado por CategoriaController en el metodo store() -->
-					<input type="text" name="nombre" class="form-control" placeholder="Nombre..">
-				</div>
-				<div class="form-group">
-					<label for="descripcion">Descripcion</label>
-					<!--nombre es recibido por CategoriaFormRequest en la funcion rules()-->
-					<input type="text" name="descripcion" class="form-control" placeholder="Descripcion..">
-				</div>
-				<div class="form-group">
-					<label for="condicion">Condicion</label><br>
-					<!--nombre es recibido por CategoriaFormRequest en la funcion rules()-->
-					<input type="checkbox" name="condicion"  id="condicion1" value="1" checked><label for="condicion1">Activo</label>
+				<!--Usado en modal para que se pueda agregar desde productos una nueva categoria-->
+				@include('administracion.almacen.categorias.form.formulario-categoria')
 
-					<input type="checkbox" name="condicion"  id="condicion0" value="0"><label for="condicion0">Inactivo</label>
-				</div>
 				<div class="form-group">
 				<button class="btn btn-primary" type="submit">Guardar</button>
-				<button class="btn btn-danger" type="reset">Cancelar</button>
+				<a class="btn btn-danger" href="{{ action('CategoriaController@index') }}" type="reset">Cancelar</a>
 				</div>
 				{!!Form::close()!!}
 			</div>	

@@ -86,11 +86,12 @@ class ReporteController extends Controller
     {
         //
     }
+
     public function get_vencidos(Request $request){
 
       //  Carbon::setLocale('es');
         $format = "d/m/Y";
-        $fecha_vencimiento=Carbon::createFromFormat($format,$request->fecha_v);
+        $fetcha_retiro=Carbon::createFromFormat($format,$request->fecha_r);
          //$fecha_vencimiento=Carbon::parse($request->fecha_v)->format('d/m/Y');
        
         // $fecha_vencimiento=
@@ -98,14 +99,21 @@ class ReporteController extends Controller
 
 
         if($request->cat==null){
-            $productos=db::table('productos')->where('fecha_vencimiento','<',$fecha_vencimiento)->where('estado',1)->get();
+            $productos=db::table('productos')->where('fecha_retiro_gondola','<',$fetcha_retiro)->where('estado',1)
+            ->join('categorias','productos.categoria_id','categorias.id')
+            ->select('productos.*','categorias.nombre as nombre_categoria')
+            ->get();
         //    dd($productos);
         }
         else
         {
            // dd($request->cat);
-             $productos=db::table('productos')->where('categoria_id',$request->cat)->where('fecha_vencimiento','<',$fecha_vencimiento)->where('estado',1)->get();
+             $productos=db::table('productos')->where('categoria_id',$request->cat)->where('fecha_retiro_gondola','<',$fetcha_retiro)->where('estado',1)
+             ->join('categorias','productos.categoria_id','categorias.id')
+             ->select('productos.*','categorias.nombre as nombre_categoria')
+            ->get();
         }
+     
         $data["productos"]=$productos;
         return $data;
     }
@@ -114,6 +122,49 @@ class ReporteController extends Controller
      public function chart()
       {// productos que vencen 5 dias despues del actual dia
          Carbon::setlocale('es');
+        $hoy=Carbon::now();
+        $dias=array();
+        $var2=array();
+        $i=0;
+        $dias[0]=$hoy->format("Y-m-d");
+        
+        $i=$i+1;
+        while ($i <= 4) {
+            $var_dia=$hoy->addDay();
+            $dias[$i]=$var_dia->format("Y-m-d");
+            $i++;
+        }
+
+        $res=db::table('productos')->where('estado',1)->orderby('fecha_retiro_gondola')->wherein('fecha_retiro_gondola',$dias)->get();
+        //$count=$res->groupby('fecha_vencimiento');
+        $var=$res->groupby('fecha_retiro_gondola');
+        $contador=$var->count();
+        $i=0;
+        foreach ($var as $clave => $value) 
+        {
+            $var2[$i]['fecha_retiro_gondola']=[$clave]; // Tengo la primer fecha
+            if(is_object($value))
+            {
+                $var2[$i]['stock']=0;
+                $j=0;
+                foreach ($value as $clave2 => $value2) 
+                {
+                    $var2[$i]['fecha_retiro_gondola']=$value2->fecha_retiro_gondola;       
+                    $var2[$i]['stock']=$value2->stock+$var2[$i]['stock'];
+                    $var2[$i]["cantidad"]=$j;
+                    $j++;
+                }
+            }
+            $i++;
+        }
+
+
+    //dd($var2);
+        return response()->json($var2);
+      }
+
+     public function detalle_proximos_vto(){
+        Carbon::setlocale('es');
         $hoy=Carbon::now();
         $dias=array();
         $i=0;
@@ -126,9 +177,22 @@ class ReporteController extends Controller
             $i++;
         }
 
-        $res=db::table('productos')->where('estado',1)->wherein('fecha_vencimiento',$dias)->get();
+        $res=db::table('productos')->where('estado',1)->orderby('fecha_retiro_gondola')->wherein('fecha_retiro_gondola',$dias)->select('productos.nombre','productos.fecha_retiro_gondola as fecha_retiro_gondola','productos.stock as stock')->get();
+        //$count=$res->groupby('fecha_vencimiento');
+        $var=$res->groupby('fecha_retiro_gondola');
+        $contador=$var->count();
+        $var2 = array();
+        
+        $i=0;
 
-        return response()->json($res);
+        foreach ($var as $key => $value) {
+            $var2[$i]=$value;
+            $i++;
+        }
+        $var3["productos"]=$var2;
+
+      
+        return response()->json($var3);
       }
 
        

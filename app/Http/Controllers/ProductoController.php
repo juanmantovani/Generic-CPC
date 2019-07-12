@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 use App\Producto;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
+use DataTables;
 
 class ProductoController extends Controller
 {
@@ -18,11 +19,28 @@ class ProductoController extends Controller
      */
     public function index()
     {
-    //$productos=Producto::all();
-        $productos=db::table('productos')->join('categorias','productos.categoria_id','categorias.id')->select('productos.*','categorias.nombre as cate_nombre')->orderby('productos.created_at')->paginate(20);
-       // dd($productos);
-      
-        return view('administracion.almacen.productos.index',compact('productos'));
+        /* Paso a datatable
+        $productos=db::table('productos')->join('categorias','productos.categoria_id','categorias.id')->select('productos.*','categorias.nombre as cate_nombre')->orderby('productos.fecha_retiro_gondola')->get();
+           $format = "d/m/Y";
+
+           foreach ($productos as $unproducto) {
+            $unproducto->fecha_retiro_gondola=\Carbon\Carbon::parse($unproducto->fecha_retiro_gondola)->format('d/m/Y');
+           }*/
+           return view('administracion.almacen.productos.index');
+    }
+    
+ 
+    public function todos_los_productos()
+    {
+
+        $productos=db::table('productos')->join('categorias','productos.categoria_id','categorias.id')->select('productos.id as id','productos.nombre as nombre','productos.codigo as codigo','categorias.nombre as cate_nombre','productos.stock as stock','productos.dias_ant_retiro as dias','productos.fecha_retiro_gondola as fecha_retiro_gondola', 'productos.fecha_ingreso as fecha_ingreso','productos.fecha_vencimiento as fecha_vencimiento','productos.estado as estado')->orderby('productos.estado','desc')->orderby('productos.fecha_retiro_gondola','asc')->get();
+/*
+        foreach ($productos as $unproducto) {
+            $unproducto->fecha_retiro_gondola=\Carbon\Carbon::parse($unproducto->fecha_retiro_gondola)->format('d/m/Y');
+            $unproducto->fecha_ingreso=\Carbon\Carbon::parse($unproducto->fecha_ingreso)->format('d/m/Y');
+            $unproducto->fecha_vencimiento=\Carbon\Carbon::parse($unproducto->fecha_vencimiento)->format('d/m/Y');
+        }*/
+        return Datatables::of($productos)->make();
     }
 
     /**
@@ -44,7 +62,7 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-   //     dd($request);
+       // dd($request->fecha_ingreso,$request->fecha_vencimiento,$request->fecha_retiro_gondola);
 
         Carbon::setLocale('es');
         $format = "d/m/Y";
@@ -58,9 +76,15 @@ class ProductoController extends Controller
         //Formateo de fecha
          $fecha_ingreso=$request->fecha_ingreso;
         $fecha_vencimiento=$request->fecha_vencimiento;
+        $fecha_retiro_gondola=$request->fecha_retiro_gondola;
+        
         $producto->fecha_ingreso= Carbon::createFromFormat($format, $fecha_ingreso);
         $producto->fecha_vencimiento= Carbon::createFromFormat($format, $fecha_vencimiento);
+        $producto->fecha_retiro_gondola= Carbon::createFromFormat($format, $fecha_retiro_gondola);
        
+       $producto->dias_ant_retiro=$request->dias_ant_retiro;
+        
+
         $producto->estado=1;
         if (Input::hasFile('imagen')){
                 $file=Input::file('imagen');
@@ -80,8 +104,8 @@ class ProductoController extends Controller
      */
     public function show($id)
     {    $producto=db::table('productos')->find($id);
-     //  dd($producto);
-        $categoria=DB::table('categorias')->where('condicion','=','1')->find($producto->categoria_id);
+      
+         $categoria=DB::table('categorias')->where('condicion','=','1')->find($producto->categoria_id);
   // dd($producto,$categoria);
         return view("administracion.almacen.productos.show",compact('producto','categoria'));
     }
@@ -109,20 +133,39 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $producto=Producto::findOrFail($id);
-        $producto->categoria_id=$request->get('idcategoria');
-        $producto->codigo=$request->get('codigo');
-        $producto->nombre=$request->get('nombre');
-        $producto->stock=$request->get('stock');
-        $producto->descripcion=$request->get('descripcion');
-        $producto->estado=1;
-        if (Input::hasFile('imagen')){
-                $file=Input::file('imagen');
-                $file->move(public_path().'/imagenes/productos/',$file->getClientOriginalName());
-                $producto->imagen=$file->getClientOriginalName();
-        }    
-        $producto->update();
-        return Redirect::to('/administracion');
+        try{
+             $producto=Producto::findOrFail($id);
+            $producto->categoria_id=$request->get('idcategoria');
+            $producto->codigo=$request->get('codigo');
+            $producto->nombre=$request->get('nombre');
+            $producto->stock=$request->get('stock');
+            $producto->descripcion=$request->get('descripcion');
+            $producto->dias_ant_retiro=$request->dias_ant_retiro;
+            $producto->estado=$request->get('estado');
+
+             Carbon::setLocale('es');
+            $format = "d/m/Y";
+            $fecha_ingreso=$request->fecha_ingreso;
+            $fecha_vencimiento=$request->fecha_vencimiento;
+            $fecha_retiro_gondola=$request->fecha_retiro_gondola;
+            $producto->fecha_ingreso= Carbon::createFromFormat($format, $fecha_ingreso);
+            $producto->fecha_vencimiento= Carbon::createFromFormat($format, $fecha_vencimiento);
+            $producto->fecha_retiro_gondola= Carbon::createFromFormat($format, $fecha_retiro_gondola);
+           
+            
+
+            if (Input::hasFile('imagen')){
+                    $file=Input::file('imagen');
+                    $file->move(public_path().'/imagenes/productos/',$file->getClientOriginalName());
+                    $producto->imagen=$file->getClientOriginalName();
+            }    
+            $producto->update();
+            return Redirect::to('/administracion/productos')->with(['titulo'=>'Actualización de Producto','status'=> 'Se actualizó exitosamente el producto!','tipo'=>'success']); 
+
+        }catch(PDOException $e){
+             return Redirect::to('/administracion/productos')->with(['titulo'=>'Actualización de Producto','status'=> 'Error al actualizar el producto!','tipo'=>'danger']);  
+
+        }
     }
 
     /**
@@ -133,10 +176,16 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
+        //     $producto=db::table('productos')->where('id',$id)->update(['estado'=>0]);
+        try{
         $producto=Producto::findOrFail($id);
-        $producto->estado=0;
-        $producto->update();
-        return Redirect::to('/administracion/almacen/productos ');
+        $producto->delete();
+        return Redirect::to('/administracion/productos')->with(['titulo'=>'Eliminación de Producto','status'=> 'Se elimino exitosamente el producto!','tipo'=>'success']);  
+        }catch(PDOException $e){
+            return Redirect::to('/administracion/productos')->with(['titulo'=>'Eliminación de Producto','status'=> 'Error al eliminar el producto!','tipo'=>'danger']);  
+        }
+       // $producto->estado=0;
+        //return Redirect::to('/administracion/almacen/productos ');
     }
 
 
@@ -150,7 +199,7 @@ class ProductoController extends Controller
 
              return back()->withInput()->with(['titulo'=>'Eliminacion de productos','status'=> 'Eliminacion exitosa!','tipo'=>'success']);
 
-        dd($productos);
+       // dd($productos);
 
 
         }

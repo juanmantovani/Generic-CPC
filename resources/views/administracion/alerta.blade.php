@@ -14,3 +14,8 @@
                 </div>
 			</div>
 @endif
+            @php
+            Session::forget('status');
+            Session::forget('tipo');
+            Session::forget('titulo');
+            @endphp

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Session;
 use \Toastr;
 use App\Categoria;
+use DataTables;
 
 use Illuminate\Support\Facades\Redirect;
 
@@ -18,8 +20,13 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categorias=db::table('categorias')->where('condicion',1)->paginate(10);
-        return view('administracion.almacen.categorias.index',compact('categorias'));
+        
+        return view('administracion.almacen.categorias.index');
+    }
+
+    public function todos_las_categorias(){
+         $categorias=db::table('categorias')->select('categorias.id as id','categorias.nombre as nombre','categorias.descripcion as descripcion','categorias.condicion as condicion')->orderby('categorias.condicion','asc')->get();
+        return Datatables::of($categorias)->make();
     }
 
     /**
@@ -40,9 +47,15 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        $categoria = new Categoria;
-        $categoria->create($request->all());
-         return Redirect::to('/administracion/categorias');
+        try 
+        {
+            $categoria = new Categoria;
+            $categoria->create($request->all());
+              return Redirect::to('/administracion/categorias')->with(['titulo'=>'Creación de una Categoría','status'=> 'Se creó exitosamente la categoría','tipo'=>'success']);
+        }
+        catch(PDOException $e){
+            return Redirect::to('/administracion/productos')->with(['titulo'=>'Creación de una categoría','status'=> 'Error al crear la categoría!','tipo'=>'danger']);  
+              }  
     }
 
     /**
@@ -76,12 +89,23 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        try {
         $categoria=Categoria::findOrFail($id);
         $categoria->nombre=$request->nombre;
         $categoria->descripcion=$request->descripcion;
+        if($request->condicion==0){
+            $productos=db::table("productos")->where('categoria_id',$id)->update(['estado'=>0]);
+        }else{
+             $productos=db::table("productos")->where('categoria_id',$id)->update(['estado'=>1]);
+        }
+        $categoria->condicion=$request->condicion;
         $categoria->update();
        
-        return Redirect::to('/administracion/categorias');
+         return Redirect::to('/administracion/categorias')->with(['titulo'=>'Actualización de una Categoría','status'=> 'Se actualizó exitosamente la categoría','tipo'=>'success']);  
+            
+        } catch (PDOException $e) {
+              return Redirect::to('/administracion/productos')->with(['titulo'=>'Actualización de una categoría','status'=> 'Error al actualizar la categoría!','tipo'=>'danger']);  
+        }
     }
 
     /**
@@ -92,6 +116,39 @@ class CategoriaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $cat = Categoria::findOrFail($id);
+            $cat->delete();
+        }catch(PDOException $e){
+             return Redirect::to('/administracion/productos')->with(['titulo'=>'Eliminación de una categoría','status'=> 'Error al eliminar la categoría!','tipo'=>'danger']);   
+        }
+          return Redirect::to('/administracion/categorias')->with(['titulo'=>'Eliminación de una Categoría','status'=> 'Se elimino exitosamente la categoría con el/los productos asociados!','tipo'=>'success']);  
+    }
+
+    public function store_ajax_modal(Request $request){
+        $categoria = new Categoria;
+        if($request->nombre==""){
+            Session::put('tipo','danger');
+            Session::put('titulo','Creacion de categoría');
+             Session::put('status','Categoria no creada!');
+         /*   $var['tipo']="danger";
+            $var['titulo']="Creacion de categoria";
+            $var['status']="Categoria no creada";*/
+            $var="No-Ok";
+            
+            return response()->json($var);
+            //return back()->withInput()->with(['titulo'=>'Creacion de categoria','status'=> 'Categoria creada con exito!','tipo'=>'success']);
+        
+        }else{
+            $categoria = new Categoria;
+            $categoria->create($request->all());
+            Session::put('tipo','success');
+            Session::put('titulo','Creación de categoría');
+             Session::put('status','Categoría creada con exito!');
+         $var="Ok";
+            return response()->json($var);
+        }
+ 
+
     }
 }
