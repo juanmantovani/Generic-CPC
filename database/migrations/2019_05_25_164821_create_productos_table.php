@@ -23,6 +23,8 @@ class CreateProductosTable extends Migration
             $table->boolean('estado')->comment('0 inactivo, 1 activo');//0 inactivo, 1 activo
             $table->date('fecha_ingreso'); //fecha de ingreso de producto
             $table->date('fecha_vencimiento');
+            $table->date('fecha_retiro_gondola');
+            $table->integer('dias_ant_retiro');
             $table->string('imagen', 250)->nullable();
 
             $table->index('categoria_id','fk_producto_categoria_id');      // Indice de categoria
