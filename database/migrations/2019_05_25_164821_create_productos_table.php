@@ -20,7 +20,7 @@ class CreateProductosTable extends Migration
             $table->string('nombre', 150);
             $table->integer('stock');
             $table->string('descripcion', 512)->nullable();
-            $table->boolean('estado')->comment('0 inactivo, 1 activo');//0 inactivo, 1 activo
+            $table->string('estado',1)->comment('0 inactivo, 1 activo');//0 inactivo, 1 activo
             $table->date('fecha_ingreso'); //fecha de ingreso de producto
             $table->date('fecha_vencimiento');
             $table->date('fecha_retiro_gondola');
