@@ -4,48 +4,39 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6ca53e6ca9f2722ddbff9c99511f0fd",
+    "content-hash": "b6a297ae0f1b4c35846dd3b0c7917da0",
     "packages": [
         {
             "name": "acacha/admin-lte-template-laravel",
-            "version": "2.0.13",
+            "version": "4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/acacha/adminlte-laravel.git",
-                "reference": "ae43d7b2f185fb22b04ee230d90bd73542461aae"
+                "reference": "f000225f5717566287ee6af981416439a3b1aff6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acacha/adminlte-laravel/zipball/ae43d7b2f185fb22b04ee230d90bd73542461aae",
-                "reference": "ae43d7b2f185fb22b04ee230d90bd73542461aae",
+                "url": "https://api.github.com/repos/acacha/adminlte-laravel/zipball/f000225f5717566287ee6af981416439a3b1aff6",
+                "reference": "f000225f5717566287ee6af981416439a3b1aff6",
                 "shasum": ""
             },
             "require": {
-                "acacha/filesystem": "^0.1.2",
-                "acacha/helpers": "^0.1.4",
+                "acacha/helpers": "dev-master",
                 "acacha/user": "~0.2",
                 "creativeorange/gravatar": "~1.0",
+                "laravel/browser-kit-testing": "^1.0",
                 "laravel/framework": "^5.4",
                 "league/flysystem": "^1.0",
-                "php": "^7.1.3"
+                "php": "~5.6|~7.0"
             },
             "require-dev": {
-                "laravel/dusk": "^3.0",
-                "phpunit/phpunit": "~7.0",
-                "squizlabs/php_codesniffer": "^3.2.3"
+                "phpunit/phpunit": "~4.0||~5.0",
+                "squizlabs/php_codesniffer": "^2.3"
             },
             "type": "package",
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.0-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Acacha\\AdminLTETemplateLaravel\\Providers\\AdminLTETemplateServiceProvider"
-                    ],
-                    "aliases": {
-                        "AdminLTE": "Acacha\\AdminLTETemplateLaravel\\Facades\\AdminLTE"
-                    }
                 }
             },
             "autoload": {
@@ -81,67 +72,11 @@
                 "issues": "https://github.com/acacha/adminlte-laravel/issues",
                 "source": "https://github.com/acacha/adminlte-laravel/tree/master"
             },
-            "time": "2018-05-21T11:51:18+00:00"
-        },
-        {
-            "name": "acacha/filesystem",
-            "version": "0.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/acacha/filesystem.git",
-                "reference": "4746999a5205c2c2e9efa1c0ed4242d845d8d28e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/acacha/filesystem/zipball/4746999a5205c2c2e9efa1c0ed4242d845d8d28e",
-                "reference": "4746999a5205c2c2e9efa1c0ed4242d845d8d28e",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~5.6|~7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0||~5.0",
-                "squizlabs/php_codesniffer": "^2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Acacha\\Filesystem\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sergi Tur Badenas",
-                    "email": "sergiturbadenas@gmail.com",
-                    "homepage": "https://github.com/acacha",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A PHP filesystem with stubs compiler support",
-            "homepage": "https://github.com/acacha/filesystem",
-            "keywords": [
-                "acacha",
-                "filesystem"
-            ],
-            "support": {
-                "issues": "https://github.com/acacha/filesystem/issues",
-                "source": "https://github.com/acacha/filesystem/tree/master"
-            },
-            "time": "2017-08-31T14:32:51+00:00"
+            "time": "2017-01-25T13:07:47+00:00"
         },
         {
             "name": "acacha/helpers",
-            "version": "0.1.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/acacha/helpers.git",
@@ -160,6 +95,7 @@
                 "phpunit/phpunit": "~4.0||~5.0",
                 "squizlabs/php_codesniffer": "^2.3"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -195,7 +131,7 @@
             ],
             "support": {
                 "issues": "https://github.com/acacha/helpers/issues",
-                "source": "https://github.com/acacha/helpers/tree/master"
+                "source": "https://github.com/acacha/helpers/tree/0.1.4"
             },
             "time": "2017-06-20T13:28:48+00:00"
         },
@@ -866,6 +802,57 @@
             },
             "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
+        },
+        {
+            "name": "laravel/browser-kit-testing",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/browser-kit-testing.git",
+                "reference": "0adfb725147815bff5516d157577f375a6e66ebd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/browser-kit-testing/zipball/0adfb725147815bff5516d157577f375a6e66ebd",
+                "reference": "0adfb725147815bff5516d157577f375a6e66ebd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "symfony/css-selector": "~3.1",
+                "symfony/dom-crawler": "~3.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\BrowserKitTesting\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Provides backwards compatibility for BrowserKit testing in Laravel 5.4.",
+            "keywords": [
+                "laravel",
+                "testing"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/browser-kit-testing/issues",
+                "source": "https://github.com/laravel/browser-kit-testing/tree/master"
+            },
+            "time": "2017-02-08T22:32:37+00:00"
         },
         {
             "name": "laravel/framework",
@@ -2232,21 +2219,20 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v5.4.3",
+            "version": "v3.4.47",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "b0a190285cd95cb019237851205b8140ef6e368e"
+                "reference": "da3d9da2ce0026771f5fe64cb332158f1bd2bc33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/b0a190285cd95cb019237851205b8140ef6e368e",
-                "reference": "b0a190285cd95cb019237851205b8140ef6e368e",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/da3d9da2ce0026771f5fe64cb332158f1bd2bc33",
+                "reference": "da3d9da2ce0026771f5fe64cb332158f1bd2bc33",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2.5",
-                "symfony/polyfill-php80": "^1.16"
+                "php": "^5.5.9|>=7.0.8"
             },
             "type": "library",
             "autoload": {
@@ -2275,10 +2261,10 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
-            "description": "Converts CSS selectors to XPath expressions",
+            "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/css-selector/tree/v5.4.3"
+                "source": "https://github.com/symfony/css-selector/tree/v3.4.47"
             },
             "funding": [
                 {
@@ -2294,7 +2280,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-02T09:53:40+00:00"
+            "time": "2020-10-24T10:57:07+00:00"
         },
         {
             "name": "symfony/debug",
@@ -2430,6 +2416,75 @@
                 }
             ],
             "time": "2021-07-12T14:48:14+00:00"
+        },
+        {
+            "name": "symfony/dom-crawler",
+            "version": "v3.4.47",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/dom-crawler.git",
+                "reference": "ef97bcfbae5b384b4ca6c8d57b617722f15241a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/ef97bcfbae5b384b4ca6c8d57b617722f15241a6",
+                "reference": "ef97bcfbae5b384b4ca6c8d57b617722f15241a6",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5.9|>=7.0.8",
+                "symfony/polyfill-ctype": "~1.8",
+                "symfony/polyfill-mbstring": "~1.0"
+            },
+            "require-dev": {
+                "symfony/css-selector": "~2.8|~3.0|~4.0"
+            },
+            "suggest": {
+                "symfony/css-selector": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\DomCrawler\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony DomCrawler Component",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/dom-crawler/tree/v3.4.47"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-10-24T10:57:07+00:00"
         },
         {
             "name": "symfony/error-handler",
@@ -6561,7 +6616,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.1.3"
+        "php": "^7.2.5"
     },
     "platform-dev": [],
     "plugin-api-version": "2.2.0"
