@@ -35,6 +35,8 @@ class ProductosTableSeeder extends Seeder
 			        'estado'=>$faker->randomElement([0,1]),
 			        'fecha_ingreso'=>$faker->dateTimeInInterval($startDate='-10 days',$interval = '+ 15 days',$timezone = null , $format = 'Y-m-d'),
 			        'fecha_vencimiento'=>$faker->dateTimeInInterval($startDate='-10 days',$interval = '+ 90 days',$timezone = null , $format = 'Y-m-d'),
+					'fecha_retiro_gondola'=>$faker->dateTimeInInterval($startDate='-10 days',$interval = '+ 90 days',$timezone = null , $format = 'Y-m-d'),
+            		'dias_ant_retiro'=>$faker->numberBetween(1,5),
 			       // dateTimeInInterval($startDate = '-30 years', $interval = '+ 5 days', $timezone = null)
 			       
 			        'imagen'=>$faker->imageUrl($width=175,$height=223)
