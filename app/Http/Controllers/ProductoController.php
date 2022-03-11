@@ -86,7 +86,7 @@ class ProductoController extends Controller
         
 
         $producto->estado=1;
-        if (Input::hasFile('imagen')){
+        if ($request->hasFile('imagen')){
                 $file=Input::file('imagen');
                 $file->move(public_path().'/imagenes/productos/',$file->getClientOriginalName());
                 $producto->imagen=$file->getClientOriginalName();
@@ -154,7 +154,7 @@ class ProductoController extends Controller
            
             
 
-            if (Input::hasFile('imagen')){
+            if ($request->hasFile('imagen')){
                     $file=Input::file('imagen');
                     $file->move(public_path().'/imagenes/productos/',$file->getClientOriginalName());
                     $producto->imagen=$file->getClientOriginalName();
