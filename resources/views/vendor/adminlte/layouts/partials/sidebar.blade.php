@@ -24,6 +24,10 @@
                     <li><a href="/administracion/categorias"><i class='fa fa-navicon'></i><span> Categorías</span></a></li>
                 </ul>
             </li>
+            <!--Clientes-->
+            <li class="active"><a href="{{ url('/clientes') }}"><i class='fa fa-users'></i> <span>Clientes</span></a></li>
+
+
            <!--Reportes-->
             <li class="treeview">
                 <a href="#"><i class='fa fa-newspaper-o'></i> <span> Reportes </span> <i class="fa fa-angle-left pull-right"></i></a>

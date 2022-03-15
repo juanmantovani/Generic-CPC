@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Ciudad;
 class CiudadesTableSeeder extends Seeder
 {
     /**
@@ -12,10 +11,10 @@ class CiudadesTableSeeder extends Seeder
     public function run()
     {
         $ciudades=['Paraná','Victoria','Crespo','Racedo','Diamante','Molino Doll','Valle María'];
-    	for ($i=0; $i<7; $i++){
-    		\DB::table('ciudades')->insert(array(
-    			'nombre'=>$ciudades[$i],
+    	
+        foreach ($ciudades as $ciudad) {
+            \DB::table('ciudades')->insert(array('nombre'=>$ciudad,
     		));
-    	}
+        };
     }
 }

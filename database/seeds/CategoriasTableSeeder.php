@@ -11,14 +11,13 @@ class CategoriasTableSeeder extends Seeder
      */
     public function run()
     {
-
     	$categorias=['Lacteos','Fideos','Embutidos','Enlatado','Bebidas','Mermelada','Azúcar'];
-    	for ($i=0; $i<7; $i++){
-    		\DB::table('categorias')->insert(array(
-    			'nombre'=>$categorias[$i],
-    			'descripcion'=>"esto es la descripcion de una categoria de". $categorias[$i],
+    	foreach ($categorias as $categoria) {
+            \DB::table('categorias')->insert(array(
+    			'nombre'=>$categoria,
+    			'descripcion'=>"esto es la descripcion de una categoria de". $categoria,
     			'condicion'=>1
     		));
-    	}
+        };
     }
 }

@@ -57,4 +57,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/administracion/productos/listado', 'ProductoController@todos_los_productos')->name('todos_los_productos');
 	//Datatables listado categorias (index)
 	Route::post('/administracion/categirias/listado', 'CategoriaController@todos_las_categorias')->name('todos_las_categorias');
+
+	//AMB de clientes
+	Route::resource('/clientes', 'ClienteController');
+
+	//Datatables listado clientes (index)
+	Route::post('/clientes/listado', 'ClienteController@todos_los_clientes')->name('todos_los_clientes');
 });

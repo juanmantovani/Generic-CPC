@@ -17,6 +17,7 @@ class CreatePersonasTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre', 150);
             $table->string('razon_social', 150);
+            $table->string('dni', 10);
             $table->string('cuil', 150);
             $table->string('direccion', 150);
             $table->integer('tipo');
