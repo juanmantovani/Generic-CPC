@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClientesTable extends Migration
+class CreatePersonasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateClientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('clientes', function (Blueprint $table) {
+        Schema::create('personas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nombre', 150);
             $table->string('razon_social', 150);
             $table->string('cuil', 150);
             $table->string('direccion', 150);
+            $table->integer('tipo');
             $table->unsignedBigInteger('ciudad_id');
 
-            $table->index('ciudad_id','fk_clientes_ciudad_id');      // Indice de categoria
+            $table->index('ciudad_id','fk_personas_ciudad_id');      // Indice de categoria
             $table->foreign('ciudad_id')->references('id')->on('ciudades');    //Clave foreanea
             
             $table->timestamps();
@@ -34,6 +36,6 @@ class CreateClientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('personas');
     }
 }
