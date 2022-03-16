@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use Illuminate\Support\Facades\Input;
-use App\Producto;
-use Illuminate\Support\Facades\Redirect;
-use Carbon\Carbon;
+use Session;
+use \Toastr;
+use App\Ciudad;
 use DataTables;
 
-
-class ClienteController extends Controller
+class CiudadesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,16 +18,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        return view('administracion.clientes.index');
-    }
-
-    public function todos_los_clientes()
-    {
-        $clientes=db::table('personas')->join('ciudades','personas.ciudad_id','ciudades.id')
-        ->where('personas.tipo','1')
-        ->select('personas.id as id','personas.nombre as nombre','personas.razon_social as razon_social','personas.cuil as cuil','personas.direccion as direccion','ciudades.nombre as ciudad')->get();
-
-        return Datatables::of($clientes)->make();
+        //
     }
 
     /**
@@ -39,8 +28,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        $ciudades=DB::table('ciudades')->get(); //Para mostrar en el alta de clientes
-        return view('administracion.clientes.create',compact('ciudades'));
+        //
     }
 
     /**
@@ -97,5 +85,26 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function store_ajax_modal_ciudad(Request $request){
+        $ciudad = new Ciudad;
+        if ($request->nombre=="") {
+            Session::put('tipo', 'danger');
+            Session::put('titulo', 'Creacion de ciudad');
+            Session::put('status', 'Ciudad no creada!');
+            $var="No-Ok";
+            
+            return response()->json($var);
+        } else {
+            $ciudad = Ciudad::create([
+                'nombre' => $request->nombre
+            ]);
+            Session::put('tipo', 'success');
+            Session::put('titulo', 'Creación de ciudad');
+            Session::put('status', 'Ciudad creada con exito!');
+            $var="Ok";
+            return response()->json($var);
+        }
     }
 }

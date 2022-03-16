@@ -25,7 +25,7 @@
                 </ul>
             </li>
             <!--Clientes-->
-            <li class="active"><a href="{{ url('/clientes') }}"><i class='fa fa-users'></i> <span>Clientes</span></a></li>
+            <li class=""><a href="{{ url('/administracion/clientes') }}"><i class='fa fa-users'></i> <span>Clientes</span></a></li>
 
 
            <!--Reportes-->

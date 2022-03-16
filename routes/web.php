@@ -56,11 +56,15 @@ Route::group(['middleware' => 'auth'], function () {
 	//Datatables listado producto (index)
 	Route::post('/administracion/productos/listado', 'ProductoController@todos_los_productos')->name('todos_los_productos');
 	//Datatables listado categorias (index)
-	Route::post('/administracion/categirias/listado', 'CategoriaController@todos_las_categorias')->name('todos_las_categorias');
+	Route::post('/administracion/categorias/listado', 'CategoriaController@todos_las_categorias')->name('todos_las_categorias');
 
 	//AMB de clientes
-	Route::resource('/clientes', 'ClienteController');
+	Route::resource('/administracion/clientes', 'ClienteController');
 
 	//Datatables listado clientes (index)
-	Route::post('/clientes/listado', 'ClienteController@todos_los_clientes')->name('todos_los_clientes');
+	Route::post('/administracion/clientes/listado', 'ClienteController@todos_los_clientes')->name('todos_los_clientes');
+
+	//Agregar ciudad
+	Route::post('/administracion/ciudades/store_modal', 'CiudadesController@store_ajax_modal_ciudad')->name('store_ajax_modal_ciudad');
+
 });
