@@ -66,9 +66,7 @@ input[type="radio"]:checked + label  {
                     <a href="#" data-toggle="modal" data-target=".pop-up-1" data-cliente="" class="btn btn-xs btn-danger pull-left" role="button"> Agregar Categoria</a>
                 </div>      
             </div>
-        </div>
-
-        <div  class="row">
+        
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label for="codigo">Código</label>
@@ -81,9 +79,13 @@ input[type="radio"]:checked + label  {
                     <input type="number" name="stock" required value="{{old('stock')}}" class="form-control" placeholder="Stock del producto...">
                 </div>      
             </div>
-        </div>
-
-        <div class="row">
+            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                <div class="form-group">
+                    <label for="precio">Precio</label>
+                    <input type="number" step="0.01" name="precio" required value="{{old('precio')}}" class="form-control" placeholder="Precio del producto...">
+                </div>      
+            </div>
+        
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label for="descripcion">Descripción</label>
@@ -96,9 +98,7 @@ input[type="radio"]:checked + label  {
                     <input data-date-format="dd/mm/yyyy" name="fecha_ingreso" required class="form-control" placeholder="Fecha de ingreso del producto..." id="fecha_ingreso">
                 </div>      
             </div>
-        </div>
-
-        <div  class="row">
+        
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group" class="input-group date">
                     <label for="descripcion">Fecha de vencimiento</label>
@@ -129,9 +129,7 @@ input[type="radio"]:checked + label  {
                     </div>
                 </div>
             </div>
-        </div>  
-
-        <div  class="row">
+        
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group" class="input-group date">
                     <label for="fecha_retiro_gondola">Fecha de retiro de gondola</label>

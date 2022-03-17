@@ -57,6 +57,7 @@ input[type="radio"]:checked + label  {
                         <input type="text" name="nombre" required value="{{$producto->nombre}}" class="form-control" placeholder="{{$producto->nombre}}">
                     </div>  
                 </div>
+
                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                     <div class="form-group">
                         <label>Categoría</label>
@@ -71,36 +72,41 @@ input[type="radio"]:checked + label  {
                         </select>
                     </div>      
                 </div>
-            </div>
-            <div class="row">
+            
                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                     <div class="form-group">
                         <label for="codigo">Código</label>
                         <input type="text" name="codigo" required value="{{$producto->codigo}}" class="form-control" placeholder="{{$producto->codigo}}" required>
                     </div>                      
                 </div>
+
                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label for="precio">Precio</label>
+                        <input type="text" name="precio" required value="{{$producto->precio}}" class="form-control" placeholder="{{$producto->precio}}" required>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                    <div class="form-group">
                         <label for="stock">Stock</label>
                         <input type="text" name="stock" required value="{{$producto->stock}}" class="form-control" placeholder="{{$producto->stock}}" required>
+                    </div>
                 </div>
-            </div>
             
-            <div class="row">
                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                     <div class="form-group">
                         <label for="descripcion">Descripción</label>
                         <input type="text" name="descripcion" value="{{$producto->descripcion}}" class="form-control" placeholder="Descripción del artículo...">
                     </div>      
                 </div>
+
                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                     <div class="form-group">
                         <label for="fecha_ingreso">Fecha de ingreso</label>
                         <input data-date-format="dd/mm/yyyy" name="fecha_ingreso" id="fecha_ingreso" value="{{ Carbon\Carbon::parse($producto->fecha_ingreso)->format('d/m/Y') }}" class="form-control" placeholder="Fecha de ingreso del producto..." required>
                     </div>      
                 </div>
-            </div>
-
-            <div class="row">
+           
                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                     <div class="form-group">
                         <label for="fecha_vencimiento">Fecha de vencimiento</label>
@@ -130,9 +136,7 @@ input[type="radio"]:checked + label  {
                         </div>
                     </div>      
                 </div>
-            </div>
-
-            <div class="row">
+           
                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                     <label for="fecha_retiro_gondola">Fecha de retiro de gondola</label>
                     <div class="form-group" id="prueba">
@@ -151,7 +155,6 @@ input[type="radio"]:checked + label  {
                         @endif
                     </div> 
                 </div>
-            </div>
 
             <div class="form-group">
                 <label for="estado">Condicion</label><br>

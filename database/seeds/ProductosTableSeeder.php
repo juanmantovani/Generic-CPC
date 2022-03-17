@@ -31,6 +31,7 @@ class ProductosTableSeeder extends Seeder
 			        'codigo'=>$faker->vat(100),
 			        'nombre'=>$faker->name(),
 			        'stock'=>$faker->numberBetween(0,500),
+					'precio'=>$faker->numberBetween(0,500),
 			        'descripcion'=>$faker->text(300),
 			        'estado'=>$faker->randomElement([0,1]),
 			        'fecha_ingreso'=>$faker->dateTimeInInterval($startDate='-10 days',$interval = '+ 15 days',$timezone = null , $format = 'Y-m-d'),

@@ -68,8 +68,9 @@
 					<th>Id</th>
 					<th>Nombre</th>	
 					<th>Código</th>	
-					<th>Categoría</th>	
-					<th >Stock</th>	
+					<th>Categoría</th>
+					<th>Precio</th>	
+					<th>Stock</th>	
 					<th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Fecha ingreso</th>	
 					<th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Fecha vencimiento</th>		
 					<th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Días de anticipación de retiro</th>
@@ -114,6 +115,7 @@
         { data: "nombre" },
         { data: "codigo" },
         { data: "cate_nombre" },
+		{ data: "precio" },
         { data: "stock" },
         { data: "fecha_ingreso","render": function ( data, type, row ) 
         	{
@@ -158,10 +160,9 @@
         ],
         order: 
         [
-        //	[8, 'asc'] //The position of your column and the order
         ],
         aoColumnDefs: [
-          { 'bSortable': false, 'aTargets': [10] }
+          { 'bSortable': false, 'aTargets': [11] }
         ],
              buttons: 
         [

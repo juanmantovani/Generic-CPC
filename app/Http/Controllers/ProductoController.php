@@ -33,13 +33,8 @@ class ProductoController extends Controller
     public function todos_los_productos()
     {
 
-        $productos=db::table('productos')->join('categorias','productos.categoria_id','categorias.id')->select('productos.id as id','productos.nombre as nombre','productos.codigo as codigo','categorias.nombre as cate_nombre','productos.stock as stock','productos.dias_ant_retiro as dias','productos.fecha_retiro_gondola as fecha_retiro_gondola', 'productos.fecha_ingreso as fecha_ingreso','productos.fecha_vencimiento as fecha_vencimiento','productos.estado as estado')->orderby('productos.estado','desc')->orderby('productos.fecha_retiro_gondola','asc')->get();
-/*
-        foreach ($productos as $unproducto) {
-            $unproducto->fecha_retiro_gondola=\Carbon\Carbon::parse($unproducto->fecha_retiro_gondola)->format('d/m/Y');
-            $unproducto->fecha_ingreso=\Carbon\Carbon::parse($unproducto->fecha_ingreso)->format('d/m/Y');
-            $unproducto->fecha_vencimiento=\Carbon\Carbon::parse($unproducto->fecha_vencimiento)->format('d/m/Y');
-        }*/
+        $productos=db::table('productos')->join('categorias','productos.categoria_id','categorias.id')->select('productos.id as id','productos.nombre as nombre','productos.codigo as codigo','categorias.nombre as cate_nombre','productos.precio as precio','productos.stock as stock','productos.dias_ant_retiro as dias','productos.fecha_retiro_gondola as fecha_retiro_gondola', 'productos.fecha_ingreso as fecha_ingreso','productos.fecha_vencimiento as fecha_vencimiento','productos.estado as estado')->orderby('productos.estado','desc')->orderby('productos.fecha_retiro_gondola','asc')->get();
+
         return Datatables::of($productos)->make();
     }
 
@@ -71,6 +66,7 @@ class ProductoController extends Controller
         $producto->categoria_id=$request->idcategoria;
         $producto->codigo=$request->codigo;
         $producto->nombre=$request->nombre;
+        $producto->precio=$request->precio;
         $producto->stock=$request->stock;
         $producto->descripcion=$request->descripcion;
         //Formateo de fecha
@@ -138,6 +134,7 @@ class ProductoController extends Controller
             $producto->categoria_id=$request->get('idcategoria');
             $producto->codigo=$request->get('codigo');
             $producto->nombre=$request->get('nombre');
+            $producto->precio=$request->get('precio');
             $producto->stock=$request->get('stock');
             $producto->descripcion=$request->get('descripcion');
             $producto->dias_ant_retiro=$request->dias_ant_retiro;
