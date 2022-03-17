@@ -13,7 +13,6 @@ class Categoria extends Model
     	'condicion'
     ];
 
-
         public function articulos()
     {
     	//Una Categoria puede tener muchos artículos

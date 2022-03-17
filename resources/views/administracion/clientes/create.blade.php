@@ -4,9 +4,7 @@
 Nuevo Cliente
 @endsection
 
-
 <meta name="csrf-token" content="{{ csrf_token() }}">
-
 
 <style type="text/css">
 input[type="radio"] + label  {
@@ -49,25 +47,25 @@ input[type="radio"]:checked + label  {
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label for="razon_social">Razon social</label>
-                    <input type="text" name="razon_social" required value="{{old('razon_social')}}" class="form-control" placeholder="Nombre...">
+                    <input type="text" name="razon_social" required value="{{old('razon_social')}}" class="form-control" placeholder="Razon social...">
                 </div>  
             </div>
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label for="dni">DNI</label>
-                    <input type="text" name="dni" required value="{{old('dni')}}" class="form-control" placeholder="Nombre...">
+                    <input type="text" name="dni" required value="{{old('dni')}}" class="form-control" placeholder="DNI...">
                 </div>  
             </div>
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label for="cuil">Cuil</label>
-                    <input type="text" name="cuil" required value="{{old('cuil')}}" class="form-control" placeholder="Nombre...">
+                    <input type="text" name="cuil" required value="{{old('cuil')}}" class="form-control" placeholder="Cuil...">
                 </div>  
             </div>
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label for="direccion">Dirección</label>
-                    <input type="text" name="direccion" required value="{{old('direccion')}}" class="form-control" placeholder="Nombre...">
+                    <input type="text" name="direccion" required value="{{old('direccion')}}" class="form-control" placeholder="Dirección...">
                 </div>  
             </div>
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -94,12 +92,10 @@ input[type="radio"]:checked + label  {
         </div>
     </div>
     
-    
     {!!Form::close()!!}
 
-
 </div>
-<!--Usado en modal para que se pueda agregar desde productos una nueva categoria-->
+<!--Usado en modal para que se pueda agregar desde clientes una nueva ciudad-->
 @include('administracion.clientes.modal.agregar-ciu')
     
 @endsection
