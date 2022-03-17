@@ -24,7 +24,7 @@ class CategoriaController extends Controller
         return view('administracion.almacen.categorias.index');
     }
 
-    public function todos_las_categorias(){
+    public function todas_las_categorias(){
          $categorias=db::table('categorias')->select('categorias.id as id','categorias.nombre as nombre','categorias.descripcion as descripcion','categorias.condicion as condicion')->orderby('categorias.condicion','asc')->get();
         return Datatables::of($categorias)->make();
     }

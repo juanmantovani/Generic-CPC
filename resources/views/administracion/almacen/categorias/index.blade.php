@@ -109,7 +109,7 @@
         ],
 	    "ajax":
 	    {
-	    	"url": '{{ route('todos_las_categorias') }}',
+	    	"url": '{{ route('todas_las_categorias') }}',
 	      	"type": "POST",
 	      	"data":{ _token: "{{csrf_token()}}"}
 	      },
