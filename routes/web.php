@@ -32,8 +32,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['middleware' => 'auth'], function () {
 
 
-    Route::get('/administracion', 'HomeController@index')->name('home');
-
+    Route::get('/administracion', 'PedidoController@index')->name('home');
 
 	//No se usa todo el controller de User, solo perfil...
 	Route::get('/administracion/user/profile/{id}', 'UserController@perfil');
@@ -44,15 +43,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('/administracion/categorias', 'CategoriaController');
 	Route::post('/administracion/categorias/store_modal', 'CategoriaController@store_ajax_modal')->name('store_ajax_modal');
 
-	//Home del reporte
-	Route::get('/administracion/reportes','ReporteController@index');
-	Route::post('/administracion/reportes/get_vencidos','ReporteController@get_vencidos')->name('get_vencidos');
-	//grafico "chart"
-	Route::get('/stock/chart_vencimientos','ReporteController@chart')->name('vencimientos_chart');
-	//Baja de los productos desde el reporte generado (panel reporte)
+	
 	Route::post('/administracion/productos/bajas','ProductoController@bajas')->name('bajas');
-	//Consulta de stock por vencimiento (desde panel reporte)
-	Route::get('/stock/detalle_vencimientos','ReporteController@detalle_proximos_vto')->name('detalle_proximos_vto');
+	
 	//Datatables listado producto (index)
 	Route::post('/administracion/productos/listado', 'ProductoController@todos_los_productos')->name('todos_los_productos');
 	//Datatables listado categorias (index)
@@ -67,5 +60,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 	//Agregar ciudad
 	Route::post('/administracion/ciudades/store_modal', 'CiudadesController@store_ajax_modal_ciudad')->name('store_ajax_modal_ciudad');
+
+
+	//AMB de pedidos
+	Route::resource('/administracion/pedidos', 'PedidoController');
+
+	//Datatables listado pedidos (index)
+	Route::post('/administracion/pedidos/listado', 'PedidoController@todos_los_pedidos')->name('todos_los_pedidos');
 
 });

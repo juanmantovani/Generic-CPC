@@ -20,9 +20,3 @@ input[type="radio"]:checked + label  {
 					<label for="descripcion">Descripcion</label>
 					<input type="text" name="descripcion" value="{{ isset($categoria->descripcion) ? $categoria->descripcion : '' }}" id="cat-descripcion" class="form-control" placeholder="Descripcion..">
 				</div>
-				<div class="form-group">
-					<label for="condicion">Condicion</label><br>
-					<input type="radio" name="condicion"  id="condicion1" value="1"  {{ (isset($categoria->condicion) && $categoria->condicion == 1 ) ? 'checked="checked"' : '' }}><label for="condicion1">Activo</label>
-					<input type="radio" name="condicion"  id="condicion0" value="0" {{ (isset($categoria->condicion) && $categoria->condicion == 0 ) ? 'checked="checked"' : '' }}><label for="condicion0">Inactivo</label>
-
-				</div>

@@ -46,63 +46,14 @@
         </div>
 
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-             <div class="form-group">
-                <label for="stock">Stock: </label>
-                {{$producto->stock}}
-            </div>      
-        </div>
-
-        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
                 <label for="descripcion">Descripción:</label>
                     {{$producto->descripcion}}
             </div>      
-        </div>
-
-        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-            <div class="form-group">
-                <label for="dias">Dias de anticipacion de retiro de gondola:</label>
-                    {{$producto->dias_ant_retiro}}
-            </div>      
-        </div>
-
-        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-            <div class="form-group">
-                <label for="retiro">Fecha de retiro de gondola: </label>
-                {{ Carbon\Carbon::parse($producto->fecha_retiro_gondola)->format('d-m-Y') }}
-                
-            </div>
-        </div>
-
-        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-            <div class="form-group">
-                <label for="ingreos">Fecha de ingreso: </label>
-                {{ Carbon\Carbon::parse($producto->fecha_ingreso)->format('d-m-Y') }}
-                
-            </div>
-        </div>
-
-        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-            <div class="form-group">
-                <label for="vencimiento">Fecha de vencimiento: </label>
-                {{ Carbon\Carbon::parse($producto->fecha_vencimiento)->format('d-m-Y') }}
-                </div>
-        </div>
-
-        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-            <div class="form-group">
-                <label for="imagen">Imagen: </label>
-                @if ( ($producto->imagen)!="")
-                    <img src="{{ asset('imagenes/productos/'.$producto->imagen)}} " height="120px">
-                @else
-                No posee imagen
-                @endif
-            </div>      
-        </div>
-
-        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 form-group">
+        </div>    
+    </div>
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 form-group">
                 <a href="/administracion/productos" class="btn btn-primary"  >Volver</a>
-        </div>
     </div>
 </div>
 @endsection

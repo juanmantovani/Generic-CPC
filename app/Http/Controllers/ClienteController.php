@@ -14,11 +14,6 @@ use DataTables;
 
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('administracion.clientes.index');
@@ -33,23 +28,12 @@ class ClienteController extends Controller
         return Datatables::of($clientes)->make();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $ciudades=DB::table('ciudades')->get(); //Para mostrar en el alta de clientes
         return view('administracion.clientes.create',compact('ciudades'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $cliente= new Persona;
@@ -65,12 +49,6 @@ class ClienteController extends Controller
         return Redirect::to('/administracion/clientes')->with(['titulo'=>'Nuevo Cliente','status'=> 'Se añadió exitosamente un nuevo cliente!','tipo'=>'success']);  
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $cliente=db::table('personas')->find($id);
@@ -80,12 +58,6 @@ class ClienteController extends Controller
         return view("administracion.clientes.show",compact('cliente','ciudad'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $cliente=db::table('personas')->find($id);
@@ -95,13 +67,6 @@ class ClienteController extends Controller
     
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         try{
@@ -120,12 +85,6 @@ class ClienteController extends Controller
        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         try{

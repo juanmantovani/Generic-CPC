@@ -15,7 +15,7 @@
         @endif
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">Menú</li>
-            <li class="active"><a href="{{ url('/administracion') }}"><i class='fa fa-home custom'></i> <span>Inicio</span></a></li>
+            <li class=""><a href="{{ url('/administracion') }}"><i class='fa fa-home custom'></i> <span>Inicio</span></a></li>
             <!--Productos-->
             <li class="treeview">
                 <a href="#"><i class='fa fa-archive'></i> <span> Almacén </span> <i class="fa fa-angle-left pull-right"></i></a>
@@ -26,16 +26,6 @@
             </li>
             <!--Clientes-->
             <li class=""><a href="{{ url('/administracion/clientes') }}"><i class='fa fa-users'></i> <span>Clientes</span></a></li>
-
-
-           <!--Reportes-->
-            <li class="treeview">
-                <a href="#"><i class='fa fa-newspaper-o'></i> <span> Reportes </span> <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">  
-                    <li><a href="/administracion/reportes"><i class='fa fa-warning'></i><span>Reportes por vencimiento </span></a></li>
-                  
-                </ul>
-            </li>
 
         </ul><!-- /.sidebar-menu -->
     </section>

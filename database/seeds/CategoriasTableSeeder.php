@@ -16,7 +16,6 @@ class CategoriasTableSeeder extends Seeder
             \DB::table('categorias')->insert(array(
     			'nombre'=>$categoria,
     			'descripcion'=>"esto es la descripcion de una categoria de". $categoria,
-    			'condicion'=>1
     		));
         };
     }

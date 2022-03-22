@@ -56,7 +56,6 @@
 					<th>Id</th>
 					<th>Nombre</th>	
 					<th>Descripción</th>
-					<th>Condicion</th>
 					<th>Opciones</th>
 				</thead>
 				<tbody>
@@ -78,35 +77,7 @@
 		iDisplayLength:			10,
         processing: true,
 	    serverSide: true,
-	    buttons: 
-        [
-        { 
-        	extend: 'print',
-        	text:'Imprimir',
-        	messageTop: 'Impresion de listado de productos por vencimiento',
-        	exportOptions: {
-        		columns: ':visible', stripNewlines: true
-        	}
-        },
-        { 
-        	extend: 'pdfHtml5',
-        	text:'PDF',
-        	messageTop: 'Impresion de listado de productos por vencimiento',
-        	exportOptions: {
-        		columns: ':visible', stripNewlines: true
-        	}
-        },
-        {
-	       	extend: 'colvis',
-	       	text: ' Ocultar coulmnas',
-	        columnText: function (dt, idx, title) 
-		        {
-	    	    	return (idx + 1) + ': ' + title;
-	        	},
-	        postfixButtons:[{extend: 'colvisGroup', text:'Restablecer',show:':hidden'}],
-
-        },
-        ],
+	    buttons: [],
 	    "ajax":
 	    {
 	    	"url": '{{ route('todas_las_categorias') }}',
@@ -119,17 +90,6 @@
         { data: "id"},
         { data: "nombre" },
         { data: "descripcion" },
-      	{ data: "condicion",render: function ( data, type, row ) 
-        	{
-        		if(data === "1"){
-    				aux="<h5><span class='label label-default'>Activa</span></h5>";
-    			} 
-    			else {
-    			 aux="<h5><span class='label label-info'>Inactiva</span></h5>";	
-    			}
-    			return aux;
-    		}
-    	},
         { data: null,
         	render: function ( data, type, row ) {
 		          	var url_show = '{{  URL::action('CategoriaController@show', ':id')}}';
@@ -146,12 +106,12 @@
         ],
 
         aoColumnDefs: [
-          { 'bSortable': false, 'aTargets': [4] }
+          { 'bSortable': false, 'aTargets': [3] }
         ],
 
         order: 
         [
-        	[3, 'desc'] //The position of your column and the order
+        	[2, 'asc'] //The position of your column and the order
         ],
 
       	language: {

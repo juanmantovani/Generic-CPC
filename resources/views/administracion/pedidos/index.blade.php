@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('htmlheader_title')
-	Clientes
+	Pedidos
 @endsection
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -34,21 +34,20 @@
 	<div class="row">
 			@include('administracion.alerta')
 	<div class="col-lg-8 col-md-8 col-sm-8  col-xs-12">
-		<h3>Listado de Clientes <a href="clientes/create"><button class="btn btn-success">Nuevo</button></a></h3>
+		<h3>Listado de Pedidos <a href="administracion/pedidos/create"><button class="btn btn-success">Nuevo</button></a></h3>
 	</div> 
 </div>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="table-responsive">
-			<table class="table table-striped table-bordered " id="clientes_tabla" >
+			<table class="table table-striped table-bordered " id="pedidos_tabla" >
 				<thead >
 					<tr>
                         <th>Id</th>
-                        <th>Nombre</th>	
-                        <th>Razon Social</th>	
-                        <th>Cuil</th>	
-                        <th>Dirección</th>	
-                        <th>Ciudad</th>	
+                        <th>Cliente</th>
+                        <th>Total</th>	
+                        <th>Fecha</th>
+                        <th>Observación</th>	
                         <th>Opciones</th>
 				    </tr>
 				</thead>
@@ -66,7 +65,7 @@
 
 
 <script type="text/javascript">
-	$('#clientes_tabla').DataTable( {
+	$('#pedidos_tabla').DataTable( {
 		dom: 'Bfrtip',//'lrtip'
 		lengthMenu:				[[5, 10, 20, 25, 50, -1], [5, 10, 20, 25, 50, "Todos"]],
 		iDisplayLength:			15,
@@ -74,34 +73,33 @@
 	    serverSide: true,
 	    "ajax":
 	    {
-	    	"url": '{{ route('todos_los_clientes') }}',
+	    	"url": '{{ route('todos_los_pedidos') }}',
 	      	"type": "POST",
 	      	"data":{ _token: "{{csrf_token()}}"}
 	    },
         aoColumns: [
         { data: "id"},
-        { data: "nombre" },
-        { data: "razon_social" },
-        { data: "cuil" },
-        { data: "direccion" },
-        { data: "ciudad" },
-
+        { data: "cliente" },
+        { data: "total" },
+        { data: "fecha","render": function ( data, type, row ) 
+        	{
+        	aux=(moment(data).format('DD/MM/YYYY'));
+        		return aux;
+        	}
+        },
+        { data: "observacion" },
         { data: null,
         	render: function ( data, type, row ) {
-		          	var url_show = '{{  URL::action('ClienteController@show', ':id')}}';
-		          		url_show= url_show.replace(':id', data.id); 
-		          	var url_edit='{{URL::action('ClienteController@edit',':id')}}';
-		          		url_edit=url_edit.replace(':id',data.id);
-		          		var url_action='{{Form::Open(array('action'=>array('ClienteController@destroy',':id'),'method'=>'delete'))}}';
-		          		url_action=url_action.replace(':id',data.id);
+              	var url_show = '{{  URL::action('PedidoController@show', ':id')}}';
+	          	url_show= url_show.replace(':id', data.id); 
 
-		  		  return "<div><a href='"+url_show+"'><button class='btn btn-primary btn-xs' >Ver</button></a><a href='"+url_edit+"'><button class='btn btn-warning btn-xs'>Editar</button></a><a href='' data-target='#modal-delete-"+data.id+"' data-toggle='modal'><button class='btn btn-danger btn-xs'> Eliminar </button></a></div><div class='modal fave modal-slide-in-right' aria-hidden='true' role='dialog' tabindex='-1' id='modal-delete-"+data.id+"'>"+url_action+"<div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button class='close' type='button' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>x</span></button><h4 class='modal-title'>Eliminar Cliente</h4></div><div class='modal-body'><div class='bg-danger text-white'>¡¡ ATENCIÓN !!<br><p>Va a eliminar un Cliente de forma irreversible!!</p><br> ¿Ésta seguro?</div></div><div class='modal-footer'><button type='button' class='btn btn-default' data-dismiss='modal'>Cerrar</button><button class='btn btn-primary' type='submit'>Confirmar</button></div></div></div></form></div>";
-		  		}
+	  		  return "<div><a href='"+url_show+"'><button class='btn btn-primary btn-xs' >Ver</button></a></div>";
+	  		}
         }
         ],
        
         aoColumnDefs: [
-          { 'bSortable': false, 'aTargets': [6] }
+          { 'bSortable': false, 'aTargets': [4] }
         ],  
              buttons: [],
       	"language": {
