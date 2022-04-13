@@ -29,14 +29,13 @@ class PedidoController extends Controller
  
     public function create()
     {
-        $clientes=DB::table('personas')->where('tipo',1)->get();
-        return view('administracion.pedidos.create',compact('clientes'));
+        return view('administracion.pedidos.create');
     }
 
   
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     public function show($id)

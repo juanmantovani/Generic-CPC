@@ -95,4 +95,14 @@ class ClienteController extends Controller
             return Redirect::to('/administracion/productos')->with(['titulo'=>'Eliminación de Cliente','status'=> 'Error al eliminar el cliente!','tipo'=>'danger']);  
         }
     }
+
+    public function dataAjaxCliente(Request $request){        
+        $data = [];
+        $search = $request->q;
+        $data=db::table('personas')->join('ciudades','personas.ciudad_id','ciudades.id')
+        ->where('personas.tipo','1')
+        ->select('personas.id as id','personas.nombre as nombre','personas.razon_social as razon_social','personas.cuil as cuil','personas.direccion as direccion','ciudades.nombre as ciudad')->get();
+
+        return response()->json($data);
+    }
 }

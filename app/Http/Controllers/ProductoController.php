@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
 use DataTables;
 
+
 class ProductoController extends Controller
 {
     public function index()
@@ -108,4 +109,20 @@ class ProductoController extends Controller
         }
 
       }
+
+      public function dataAjaxProducto (Request $request){
+        $data = [];
+        if($request->has('codigo')){
+            $search = $request->q;
+            $data = Producto::select("nombre","precio")
+            ->where('codigo',$request->codigo)
+            ->get();
+        }
+        if(count($data) <> 0){
+            return response()->json($data);
+        }else{
+            return response()->json($data);
+
+        }
+    }
 }

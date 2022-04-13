@@ -68,4 +68,10 @@ Route::group(['middleware' => 'auth'], function () {
 	//Datatables listado pedidos (index)
 	Route::post('/administracion/pedidos/listado', 'PedidoController@todos_los_pedidos')->name('todos_los_pedidos');
 
+	Route::get('/select2-autocomplete-cliente', 'Select2Controller@dataAjaxCliente')->name('dataAjaxCliente');
+
+	Route::get('/obtenerInfoProducto', 'ProductoController@dataAjaxProducto')->name('dataAjaxProducto');
+
+	Route::get('obtenerInfoCliente','ClienteController@dataAjaxCliente')->name('dataAjaxCliente');
+
 });
