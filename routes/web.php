@@ -74,4 +74,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('obtenerInfoCliente','ClienteController@dataAjaxCliente')->name('dataAjaxCliente');
 
+	Route::post('registrarPedido','PedidoController@store')->name('registrarPedido');
+
 });

@@ -101,6 +101,7 @@ class ClienteController extends Controller
         $search = $request->q;
         $data=db::table('personas')->join('ciudades','personas.ciudad_id','ciudades.id')
         ->where('personas.tipo','1')
+        ->where('personas.id',$request->idCliente)
         ->select('personas.id as id','personas.nombre as nombre','personas.razon_social as razon_social','personas.cuil as cuil','personas.direccion as direccion','ciudades.nombre as ciudad')->get();
 
         return response()->json($data);
