@@ -34,11 +34,6 @@ class ProductoController extends Controller
 
     public function store(Request $request)
     {
-       // dd($request->fecha_ingreso,$request->fecha_vencimiento,$request->fecha_retiro_gondola);
-
-        Carbon::setLocale('es');
-        $format = "d/m/Y";
-
         $producto= new Producto;
         $producto->categoria_id=$request->idcategoria;
         $producto->codigo=$request->codigo;

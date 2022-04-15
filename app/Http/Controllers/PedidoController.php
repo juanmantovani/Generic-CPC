@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Input;
 use App\Pedido;
+use App\Producto;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
 use DataTables;
@@ -35,7 +36,25 @@ class PedidoController extends Controller
   
     public function store(Request $request)
     {
-        dd($request);
+        $pedido= new Pedido;
+        $pedido->cliente_id=$request->idCliente;
+        $pedido->total = $request->total;
+        $pedido->save();
+
+        $ultimoPedido =  DB::table('pedidos')->max('id');
+        
+        for($i=0;$i<count($request->filas);$i++){
+            $aux = Producto::select("id")
+            ->where('codigo',$request->filas[$i]['codigo'])
+            ->get();
+
+            $producto_id = $aux[0]->id;
+            $cantidad = $request->filas[$i]['cantidad'];
+
+            DB::insert("insert into productos_pedido (producto_id,pedido_id,cantidad) values ($producto_id, $ultimoPedido, $cantidad )");
+        }
+
+        return Redirect::to('/administracion/pedidos')->with(['titulo'=>'Nuevo Pedido','status'=> 'Se añadio exitosamente un nuevo pedido!','tipo'=>'success']);  
     }
 
     public function show($id)

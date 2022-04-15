@@ -61,7 +61,6 @@
       }
  });
  var token = '{{ csrf_token() }}';
- console.log(idCliente, filas, total)
  $.ajax({
     type:"POST",
     url: "/registrarPedido",
