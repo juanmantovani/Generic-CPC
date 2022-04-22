@@ -4,7 +4,7 @@
       <div class="modal-body">
        <div class="row">
          <div class="col-md-12">
-         <div>
+         <div id="areaImprimir">
              <div class=row>
                  <input type="text" id="idCli"class="hidden">
                 <span id="clienteNombre" class="col-md-6"></span>
@@ -70,6 +70,24 @@
       "filas" : filas,
       "total": total,
       "_token":token
-    }});
+    },
+    success: function(data){
+        printDiv('areaImprimir')
+        window.location.reload(true);
+        }
+  });
  }
+</script>
+
+<script>
+  function printDiv(nombreDiv) {
+     var contenido= document.getElementById(nombreDiv).innerHTML;
+     var contenidoOriginal= document.body.innerHTML;
+
+     document.body.innerHTML = contenido;
+
+     window.print();
+
+     document.body.innerHTML = contenidoOriginal;
+}
 </script>

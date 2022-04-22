@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Session;
 use Illuminate\Support\Facades\Input;
 use App\Pedido;
 use App\Producto;
@@ -54,7 +55,11 @@ class PedidoController extends Controller
             DB::insert("insert into productos_pedido (producto_id,pedido_id,cantidad) values ($producto_id, $ultimoPedido, $cantidad )");
         }
 
-        return Redirect::to('/administracion/pedidos')->with(['titulo'=>'Nuevo Pedido','status'=> 'Se añadio exitosamente un nuevo pedido!','tipo'=>'success']);  
+        Session::put('tipo', 'success');
+            Session::put('titulo', 'Confirmación de pedido');
+            Session::put('status', 'Pedido confirmado con exito!');
+            $var="Ok";
+            return response()->json($var);  
     }
 
     public function show($id)
