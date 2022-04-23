@@ -1,27 +1,9 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
 Route::get('/', function () {
 
     return view('vendor.adminlte.home');
 })->middleware('auth');
-
-/*
-Route::get('/administracion', function () {
-    return view('welcome');
-})->name('home');*/
-
 
 //		   Route::auth();
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -30,7 +12,6 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 //Rutas con middleware de autentificacion
 Route::group(['middleware' => 'auth'], function () {
-
 
     Route::get('/administracion', 'PedidoController@index')->name('home');
 
@@ -42,8 +23,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('/administracion/productos', 'ProductoController');
 	Route::resource('/administracion/categorias', 'CategoriaController');
 	Route::post('/administracion/categorias/store_modal', 'CategoriaController@store_ajax_modal')->name('store_ajax_modal');
-
-	
 	Route::post('/administracion/productos/bajas','ProductoController@bajas')->name('bajas');
 	
 	//Datatables listado producto (index)
@@ -51,7 +30,6 @@ Route::group(['middleware' => 'auth'], function () {
 	//Datatables listado categorias (index)
 	Route::post('/administracion/categorias/listado', 'CategoriaController@todas_las_categorias')->name('todas_las_categorias');
 
-	
 	//AMB de clientes
 	Route::resource('/administracion/clientes', 'ClienteController');
 

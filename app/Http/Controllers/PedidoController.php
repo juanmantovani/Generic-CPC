@@ -64,7 +64,24 @@ class PedidoController extends Controller
 
     public function show($id)
     {
-        //
+        $pedido=db::table('pedidos')
+        ->join('personas','pedidos.cliente_id','personas.id')
+        ->join('ciudades', 'personas.ciudad_id','ciudades.id')
+        ->where('pedidos.id',$id)
+        ->select('pedidos.id as id','personas.nombre as nombre','personas.razon_social as razon_social','pedidos.created_at as fecha','personas.direccion as direccion','pedidos.total as total','ciudades.nombre as ciudad')->get();
+    
+        $productos=db::table('pedidos')
+        ->join('productos_pedido','pedidos.id','productos_pedido.pedido_id')
+        ->join('productos','productos.id','productos_pedido.producto_id')
+        ->where('pedidos.id',$id)
+        ->select('productos.codigo as codigo','productos.nombre as producto','productos_pedido.cantidad as cantidad', 'productos.precio as precio')->get();;
+
+        return view('administracion.pedidos.show',compact('pedido','productos'));
+    }
+
+    public function pedidoShow (){
+        
+        
     }
 
     /**
