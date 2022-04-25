@@ -24,7 +24,9 @@ class PedidoController extends Controller
     {
         $pedidos=db::table('pedidos')
         ->join('personas','pedidos.cliente_id','personas.id')
-        ->select('pedidos.id as id','personas.nombre as cliente','pedidos.created_at as fecha','pedidos.observacion as observacion','pedidos.total as total')->get();
+        ->join('ciudades','personas.ciudad_id','ciudades.id')
+        ->select('pedidos.id as id','personas.nombre as cliente','pedidos.created_at as fecha','ciudades.nombre as ciudad','pedidos.total as total')
+        ->orderBy('pedidos.created_at', 'DESC')->get();
 
         return Datatables::of($pedidos)->make();
     }

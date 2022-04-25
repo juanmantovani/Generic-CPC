@@ -43,15 +43,14 @@
 			<table class="table table-striped table-bordered " id="pedidos_tabla" >
 				<thead >
 					<tr>
-                        <th>Id</th>
+                        <th>Nº pedido</th>
                         <th>Cliente</th>
+						<th>Ciudad</th>
                         <th>Total</th>	
                         <th>Fecha</th>
-                        <th>Observación</th>	
                         <th>Opciones</th>
 				    </tr>
 				</thead>
-
 				<tbody>					
 				</tbody>
 			</table>
@@ -80,6 +79,7 @@
         aoColumns: [
         { data: "id"},
         { data: "cliente" },
+		{ data: "ciudad" },
         { data: "total" },
         { data: "fecha","render": function ( data, type, row ) 
         	{
@@ -87,7 +87,6 @@
         		return aux;
         	}
         },
-        { data: "observacion" },
         { data: null,
         	render: function ( data, type, row ) {
               	var url_show = '{{  URL::action('PedidoController@show', ':id')}}';
@@ -97,9 +96,10 @@
 	  		}
         }
         ],
-       
+		order: [],
         aoColumnDefs: [
-          { 'bSortable': false, 'aTargets': [4] }
+          { 'bSortable': false,
+			'aTargets': [5] }
         ],  
              buttons: [],
       	"language": {
