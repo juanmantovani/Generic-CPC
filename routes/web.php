@@ -1,7 +1,6 @@
 <?php
 
 Route::get('/', function () {
-
     return view('vendor.adminlte.home');
 })->middleware('auth');
 

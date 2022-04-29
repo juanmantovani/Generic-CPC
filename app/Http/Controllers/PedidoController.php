@@ -70,7 +70,7 @@ class PedidoController extends Controller
         ->join('personas','pedidos.cliente_id','personas.id')
         ->join('ciudades', 'personas.ciudad_id','ciudades.id')
         ->where('pedidos.id',$id)
-        ->select('pedidos.id as id','personas.nombre as nombre','personas.razon_social as razon_social','pedidos.created_at as fecha','personas.direccion as direccion','pedidos.total as total','ciudades.nombre as ciudad')->get();
+        ->select('pedidos.id as id','personas.nombre as nombre','personas.razon_social as razon_social','pedidos.created_at as fecha','personas.direccion as direccion','pedidos.total as total','ciudades.nombre as ciudad','personas.cuil as cuil')->get();
     
         $productos=db::table('pedidos')
         ->join('productos_pedido','pedidos.id','productos_pedido.pedido_id')

@@ -41,8 +41,8 @@ input[type="radio"]:checked + label  {
 <div id="areaImprimir">
              <div class=row>
                 <span class="col-md-6"><strong>Cliente: </strong>{{$pedido[0]->nombre}}</span>
-                <span class="col-md-6"><strong>Razon social: </strong>{{$pedido[0]->razon_social}}</span>
-                <span class="col-md-12"><strong>Dirección: </strong>{{$pedido[0]->direccion}}</span>
+                <span class="col-md-6"><strong>Razon Social: </strong>{{$pedido[0]->razon_social}} - {{$pedido[0]->cuil}}</span>
+                <span class="col-md-12"><strong>Dirección: </strong>{{$pedido[0]->direccion}} - {{$pedido[0]->ciudad}}</span>
              </div>
              <div class=row>
              <span class="col-md-6"><strong>Fecha: </strong>{{ Carbon\Carbon::parse($pedido[0]->fecha)->format('d-m-Y') }}</span>

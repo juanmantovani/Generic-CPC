@@ -99,7 +99,7 @@
 	          		var url_action='{{Form::Open(array('action'=>array('CategoriaController@destroy',':id'),'method'=>'delete'))}}';
 		          		url_action=url_action.replace(':id',data.id);
 
-		  		  return "<div><a href='"+url_show+"'><button class='btn btn-primary btn-xs' >Ver</button></a><a href='"+url_edit+"'><button class='btn btn-warning btn-xs'>Editar</button></a><a href='' data-target='#modal-delete-"+data.id+"' data-toggle='modal'><button class='btn btn-danger btn-xs'> Eliminar </button></a></div><div class='modal fave modal-slide-in-right' aria-hidden='true' role='dialog' tabindex='-1' id='modal-delete-"+data.id+"'>"+url_action+"<div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button class='close' type='button' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>x</span></button><h4 class='modal-title'>Eliminar Categoría</h4></div><div class='modal-body'><div class='bg-danger text-white'>¡¡ ATENCIÓN !!<br><p>Va a eliminar una Categoria de forma irreversible!!</p><br> Está acción eliminara <strong>TODOS</strong> los productos asociadas a la categoria: <strong><i>"+data.nombre+"</i></strong> ¿Ésta seguro?</div></div><div class='modal-footer'><button type='button' class='btn btn-default' data-dismiss='modal'>Cerrar</button><button class='btn btn-primary' type='submit'>Confirmar</button></div></div></div></form></div>";
+		  		  return "<div><a href='"+url_show+"'><button class='btn btn-primary btn-xs'>Ver</button></a>&nbsp<a href='"+url_edit+"'><button class='btn btn-warning btn-xs'>Editar</button></a>&nbsp<a href='' data-target='#modal-delete-"+data.id+"' data-toggle='modal'><button class='btn btn-danger btn-xs'> Eliminar </button></a></div><div class='modal fave modal-slide-in-right' aria-hidden='true' role='dialog' tabindex='-1' id='modal-delete-"+data.id+"'>"+url_action+"<div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button class='close' type='button' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>x</span></button><h4 class='modal-title'>Eliminar Categoría</h4></div><div class='modal-body'><div class='bg-danger text-white'>¡¡ ATENCIÓN !!<br><p>Va a eliminar una Categoria de forma irreversible!!</p><br> Está acción eliminara <strong>TODOS</strong> los productos asociadas a la categoria: <strong><i>"+data.nombre+"</i></strong> ¿Ésta seguro?</div></div><div class='modal-footer'><button type='button' class='btn btn-default' data-dismiss='modal'>Cerrar</button><button class='btn btn-primary' type='submit'>Confirmar</button></div></div></div></form></div>";
 		  		}
 
         	},
@@ -110,9 +110,7 @@
         ],
 
         order: 
-        [
-        	[2, 'asc'] //The position of your column and the order
-        ],
+        [ ],
 
       	language: {
 				select: {

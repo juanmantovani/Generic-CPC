@@ -54,7 +54,7 @@ input[type="radio"]:checked + label  {
         <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12 bloque">
             <div class="form-group">
                 <label for="codigo">Codigo</label>
-                <input type="text" id="codigo" class="form-control" placeholder="codigo...">
+                <input type="text" id="codigo" class="form-control" placeholder="Codigo...">
             </div>  
         </div>
 
