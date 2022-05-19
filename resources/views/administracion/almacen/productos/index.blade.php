@@ -14,22 +14,6 @@ Productos
 
 <link rel="stylesheet" href="{{ asset('/plugins/datatables/dataTables.bootstrap.css') }}">
 
-<script src="{{ asset ("js/datatables/v1.5.6/dataTables.buttons.min.js") }}" type="text/javascript"></script>
-
-<script src="{{ asset ("js/datatables/v1.5.6/buttons.print.min.js") }}" type="text/javascript"></script>
-
-<script src="{{ asset ("js/datatables/v1.5.6/buttons.colVis.min.js") }}" type="text/javascript"></script>
-
-<script src="{{ asset ("js/pdf/v0.1.53/pdfmake.min.js") }}" type="text/javascript"></script>
-
-<script src="{{ asset ("js/pdf/v0.1.53/vfs_fonts.js") }}" type="text/javascript"></script>
-
-<script src="{{ asset ("js/datatables/v1.5.6/buttons.html5.min.js") }}" type="text/javascript"></script>
-
-<script src="{{ asset ("js/moment/v2.14.1/moment.min.js") }}" type="text/javascript"></script>
-
-<script src="{{ asset ("js/datetime-moment/v1.10.19/datetime-moment.js") }}" type="text/javascript"></script>
-
 @section('main-content')
 <div class="container-fluid spark-screen">
 

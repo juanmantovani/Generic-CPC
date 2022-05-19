@@ -84,7 +84,7 @@ input[type="radio"]:checked + label  {
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
             <button type="button" class="btn btn-secondary"> <a  href="{{route('home')}}" style="text-decoration:none;color:black" >Volver</a> </button>
-                <a href="#" class="btn btn-primary" onClick='onConfirmar(this)' data-toggle="modal"  data-target="#confirmar_pedido" type="submit">Confirmar</a>
+                <a href="#" class="btn btn-primary" onClick='onConfirmar()' data-toggle="modal"  data-target="#confirmar_pedido" type="submit">Confirmar</a>
             </div>
         </div>
     </div>

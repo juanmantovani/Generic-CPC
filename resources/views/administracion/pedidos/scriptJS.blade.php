@@ -67,9 +67,9 @@ function Elimina(NodoBoton){
                         var TD6= document.createElement("td")
 
                         TD1.innerHTML=codigo;
-                        TD4.innerHTML="<input value ='"+cantidad+"' min=1 type='number' onChange='onChange(this)' />";
                         TD2.innerHTML=json[0].nombre;
-                        TD3.innerHTML="<input  step='any' value='"+json[0].precio+"' min=1 type='number' onChange='onChange(this)' />";
+                        TD3.innerHTML="<input  step='any' class='form-control' value='"+json[0].precio+"' min=1 type='number' onChange='onChange(this)' />";
+                        TD4.innerHTML="<input value ='"+cantidad+"'class='form-control' min=1 type='number' onChange='onChange(this)' />";
                         TD5.innerHTML="<span >"+json[0].precio*cantidad+"</span>";
                         TD6.innerHTML="<button class='btn btn-danger btn-xs' onclick='Elimina(this)' >Eliminar</button>"
 
@@ -133,7 +133,7 @@ function Elimina(NodoBoton){
 </script>
 
 <script>
-    function onConfirmar(coso){
+    function onConfirmar(){
         const idCliente = document.getElementById("idCliente").value;
         if(idCliente != ''){
             var codigo;
@@ -204,4 +204,13 @@ function Elimina(NodoBoton){
             return(`${day}-${month}-${year}`)
         }
     }
+</script>
+
+<script>
+    $(document).on('keypress',function(e) {
+    if(e.which == 13) {
+        return false;
+    }
+});
+
 </script>
