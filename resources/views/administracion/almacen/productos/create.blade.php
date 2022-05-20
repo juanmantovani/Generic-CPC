@@ -56,7 +56,7 @@ input[type="radio"]:checked + label  {
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label>Categoría</label>
-                    <select name="idcategoria" class="form-control"><!--con el name se valida en el ProductoFormRequest-->
+                    <select name="idcategoria" class="form-control" required><!--con el name se valida en el ProductoFormRequest-->
                         <!--voy a recibir todas las categorias en una variable $categorias desde el metodo create de ProductoController-->
                          <option value="">Seleccione una categoría</option>
                         @foreach ($categorias as $cat)
