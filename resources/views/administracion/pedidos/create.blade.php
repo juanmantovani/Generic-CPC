@@ -17,6 +17,13 @@ input[type="radio"] + label  {
 }
 input[type="radio"]:checked + label  {
 }
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }
 </style>
 
 <script src="{{ url (mix('/js/app.js')) }}" type="text/javascript"></script>
@@ -54,7 +61,7 @@ input[type="radio"]:checked + label  {
         <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12 bloque">
             <div class="form-group">
                 <label for="codigo">Codigo</label>
-                <input type="text" id="codigo" class="form-control" placeholder="Codigo...">
+                <input type="number" id="codigo" class="form-control" placeholder="Codigo...">
             </div>  
         </div>
 

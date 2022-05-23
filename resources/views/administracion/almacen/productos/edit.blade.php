@@ -23,6 +23,13 @@ Editando producto
     }
 
     input[type="radio"]:checked+label {}
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }
 </style>
 
 @section('main-content')
@@ -63,7 +70,7 @@ Editando producto
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label for="codigo">Código</label>
-                    <input type="text" name="codigo" required value="{{$producto->codigo}}" class="form-control" placeholder="{{$producto->codigo}}" required>
+                    <input type="number" name="codigo" required value="{{$producto->codigo}}" class="form-control" placeholder="{{$producto->codigo}}" required>
                 </div>
             </div>
 

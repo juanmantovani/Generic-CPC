@@ -17,6 +17,13 @@ input[type="radio"] + label  {
 }
 input[type="radio"]:checked + label  {
 }
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }
 </style>
 
 <script src="{{ url (mix('/js/app.js')) }}" type="text/javascript"></script>
@@ -53,7 +60,7 @@ input[type="radio"]:checked + label  {
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label for="dni">DNI</label>
-                    <input type="text" name="dni" required value="{{old('dni')}}" class="form-control" placeholder="DNI...">
+                    <input type="number" name="dni" required value="{{old('dni')}}" class="form-control" placeholder="DNI...">
                 </div>  
             </div>
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">

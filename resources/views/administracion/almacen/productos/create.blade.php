@@ -19,17 +19,19 @@ input[type="radio"] + label  {
 }
 input[type="radio"]:checked + label  {
 }
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }
 </style>
 
 
 <script src="{{ url (mix('/js/app.js')) }}" type="text/javascript"></script>
 
 <script src="{{ asset ("/plugins/datepicker/bootstrap-datepicker.js") }}" type="text/javascript"></script>
-
-<!--Para formatear la fecha
-    background:url({ { asset ("/img/bootstrap-datepicker.js") }}check_radio_sheet.png) -19px top no-repeat;
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
--->
 
 <script src="{{ asset ("js/moment/v2.14.1/moment.min.js") }}" type="text/javascript"></script>
 
@@ -53,11 +55,11 @@ input[type="radio"]:checked + label  {
                     <input type="text" name="nombre" required value="{{old('nombre')}}" class="form-control" placeholder="Nombre...">
                 </div>  
             </div>
+
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label>Categoría</label>
-                    <select name="idcategoria" class="form-control" required><!--con el name se valida en el ProductoFormRequest-->
-                        <!--voy a recibir todas las categorias en una variable $categorias desde el metodo create de ProductoController-->
+                    <select name="idcategoria" class="form-control" required>
                          <option value="">Seleccione una categoría</option>
                         @foreach ($categorias as $cat)
                             <option value="{{$cat->id}}">{{$cat->nombre}}</option>
@@ -70,7 +72,7 @@ input[type="radio"]:checked + label  {
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label for="codigo">Código</label>
-                    <input type="text" name="codigo" required value="{{old('codigo')}}" class="form-control" placeholder="Código del producto...">
+                    <input type="number" name="codigo" required value="{{old('codigo')}}" class="form-control" placeholder="Código del producto...">
                 </div>                      
             </div>
            
@@ -87,7 +89,7 @@ input[type="radio"]:checked + label  {
                     <input type="text" name="descripcion" value="{{old('descripcion')}}" class="form-control" placeholder="Descripción del producto...">
                 </div>              
             </div>
-          
+          </div>
         <div  class="row">
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">

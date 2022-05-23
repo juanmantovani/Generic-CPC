@@ -21,7 +21,10 @@ class ProductoController extends Controller
  
     public function todos_los_productos()
     {
-        $productos=db::table('productos')->join('categorias','productos.categoria_id','categorias.id')->select('productos.id as id','productos.nombre as nombre','productos.codigo as codigo','categorias.nombre as cate_nombre','productos.precio as precio')->get();
+        $productos=db::table('productos')
+        ->join('categorias','productos.categoria_id','categorias.id')
+        ->where('productos.activo', 1)
+        ->select('productos.id as id','productos.nombre as nombre','productos.codigo as codigo','categorias.nombre as cate_nombre','productos.precio as precio')->get();
 
         return Datatables::of($productos)->make();
     }
@@ -40,6 +43,7 @@ class ProductoController extends Controller
         $producto->nombre=$request->nombre;
         $producto->precio=$request->precio;
         $producto->descripcion=$request->descripcion;
+        $producto->activo = 1;
         $producto->save();
         
         return Redirect::to('/administracion/productos')->with(['titulo'=>'Nuevo Producto','status'=> 'Se añadio exitosamente un nuevo producto!','tipo'=>'success']);  
@@ -86,7 +90,8 @@ class ProductoController extends Controller
     {
         try{
             $producto=Producto::findOrFail($id);
-            $producto->delete();
+            $producto->activo = 0;
+            $producto->update();
        
             return Redirect::to('/administracion/productos')->with(['titulo'=>'Eliminación de Producto','status'=> 'Se elimino exitosamente el producto!','tipo'=>'success']);  
         }catch(PDOException $e){
@@ -111,6 +116,7 @@ class ProductoController extends Controller
             $search = $request->q;
             $data = Producto::select("nombre","precio")
             ->where('codigo',$request->codigo)
+            ->where('activo',1)
             ->get();
         }
         if(count($data) <> 0){

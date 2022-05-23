@@ -20,6 +20,7 @@ class CreateProductosTable extends Migration
             $table->string('nombre', 150);
             $table->float('precio');
             $table->string('descripcion', 512)->nullable();
+            $table->integer('activo');
 
             $table->index('categoria_id','fk_producto_categoria_id');      // Indice de categoria
             $table->foreign('categoria_id')->references('id')->on('categorias');    //Clave foreanea
